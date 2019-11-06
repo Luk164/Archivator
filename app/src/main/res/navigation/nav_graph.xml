@@ -17,6 +17,6 @@
     <fragment
         android:id="@+id/mainScreen"
         android:name="sk.tuke.archivator.MainScreen"
-        android:label="fragment_main_screen"
+        android:label="fragment_main_screen2"
         tools:layout="@layout/fragment_main_screen" />
 </navigation>
