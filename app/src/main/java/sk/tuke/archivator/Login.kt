@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.navOptions
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.fragment_login.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -21,11 +22,13 @@ class Login : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        button_login.setOnClickListener{
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
+
+        view.button_login.setOnClickListener{
             view?.findNavController()?.navigate(R.id.action_login_to_mainScreen)
         }
 
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        return view
     }
 
     override fun onResume() {

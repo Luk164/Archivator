@@ -2,6 +2,12 @@ package sk.tuke.archivator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModel
+
+class VM : ViewModel()
+{
+
+}
 
 class MainActivity : AppCompatActivity() {
 
