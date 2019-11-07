@@ -16,7 +16,16 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
+            }
+        }
+
+        }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -58,5 +67,15 @@ dependencies {
 
     // optional - Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    implementation "androidx.room:room-runtime:2.2.1"
+    kapt "androidx.room:room-compiler:2.2.1" // For Kotlin use kapt instead of annotationProcessor
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.2.1"
+
+    // Test helpers
+    testImplementation "androidx.room:room-testing:2.2.1"
+
 
 }

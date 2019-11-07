@@ -18,5 +18,14 @@
         android:id="@+id/mainScreen"
         android:name="sk.tuke.archivator.MainScreen"
         android:label="fragment_main_screen2"
-        tools:layout="@layout/fragment_main_screen" />
+        tools:layout="@layout/fragment_main_screen" >
+        <action
+            android:id="@+id/action_mainScreen_to_newEntry"
+            app:destination="@id/newEntry" />
+    </fragment>
+    <fragment
+        android:id="@+id/newEntry"
+        android:name="sk.tuke.archivator.NewEntry"
+        android:label="fragment_new_entry"
+        tools:layout="@layout/fragment_new_entry" />
 </navigation>
