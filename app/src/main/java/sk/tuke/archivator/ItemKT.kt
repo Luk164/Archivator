@@ -1,6 +1,6 @@
 package sk.tuke.archivator
 
-import java.util.*
+import android.icu.util.Calendar
 
 
 class ItemKT(_name: String = "N/A", _date: Calendar = Calendar.getInstance(), _description: String = "N/A") {

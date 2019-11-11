@@ -55,6 +55,24 @@
                 android:inputType="date"
                 android:focusable="false" />
 
+            <Button
+                android:id="@+id/button_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Image" />
+
+            <Button
+                android:id="@+id/button_addImage2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ADD IMAGE 2" />
+
+            <ImageView
+                android:id="@+id/imageView_entry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/sym_def_app_icon" />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
