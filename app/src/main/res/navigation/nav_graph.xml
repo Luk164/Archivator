@@ -17,17 +17,17 @@
     <fragment
         android:id="@+id/mainScreen"
         android:name="sk.tuke.archivator.MainScreen"
-        android:label="fragment_main_screen2"
+        android:label="fragment_main_screen"
         tools:layout="@layout/fragment_main_screen" >
         <action
             android:id="@+id/action_mainScreen_to_newEntry"
             app:destination="@id/newEntry" />
         <action
             android:id="@+id/action_mainScreen_to_settings"
-            app:destination="@id/settings2" />
+            app:destination="@id/settings" />
         <action
             android:id="@+id/action_mainScreen_to_showDetails2"
-            app:destination="@id/showDetails2" />
+            app:destination="@id/showDetails" />
     </fragment>
     <fragment
         android:id="@+id/newEntry"
@@ -35,12 +35,12 @@
         android:label="fragment_new_entry"
         tools:layout="@layout/fragment_new_entry" />
     <fragment
-        android:id="@+id/settings2"
+        android:id="@+id/settings"
         android:name="sk.tuke.archivator.Settings"
         android:label="Settings" />
     <fragment
-        android:id="@+id/showDetails2"
+        android:id="@+id/showDetails"
         android:name="sk.tuke.archivator.ShowDetails"
-        android:label="fragment_show_details2"
+        android:label="fragment_show_details"
         tools:layout="@layout/fragment_show_details" />
 </navigation>
