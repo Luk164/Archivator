@@ -22,58 +22,54 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/text_name"
+            <LinearLayout
+                android:id="@+id/scrollView_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Name"
-                android:inputType="textPersonName" />
+                android:orientation="vertical">
 
-            <MultiAutoCompleteTextView
-                android:id="@+id/text_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Description" />
+                <EditText
+                    android:id="@+id/text_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Name"
+                    android:inputType="textPersonName" />
 
-            <EditText
-                android:id="@+id/text_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="date"
-                android:ems="10"
-                android:hint="DD/MM/YYYY"
-                android:inputType="date"
-                android:focusable="false" />
+                <MultiAutoCompleteTextView
+                    android:id="@+id/text_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Description" />
 
-            <Button
-                android:id="@+id/button_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Image" />
+                <EditText
+                    android:id="@+id/text_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="date"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="date" />
 
-            <Button
-                android:id="@+id/button_addImage2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ADD IMAGE 2" />
+                <Button
+                    android:id="@+id/button_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add Image" />
 
-            <ImageView
-                android:id="@+id/imageView_entry"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/sym_def_app_icon" />
+                <ImageSwitcher
+                    android:id="@+id/imageSwitcher1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></ImageSwitcher>
 
-        </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -14,22 +14,17 @@ android {
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [
-                        "room.incremental"     : "true",
-                        "room.expandProjection": "true"]
-            }
-        }
-
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 
     buildTypes {
@@ -53,6 +48,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
+
+    implementation 'androidx.preference:preference:1.1.0'
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
