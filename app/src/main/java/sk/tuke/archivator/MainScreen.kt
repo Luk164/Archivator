@@ -26,6 +26,10 @@ class MainScreen : Fragment() {
             view.findNavController().navigate(R.id.action_mainScreen_to_newEntry)
         }
 
+        view.button_settings.setOnClickListener {
+            view.findNavController().navigate(R.id.action_mainScreen_to_settings2)
+        }
+
         return view
     }
 

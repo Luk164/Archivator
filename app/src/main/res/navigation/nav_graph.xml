@@ -22,10 +22,25 @@
         <action
             android:id="@+id/action_mainScreen_to_newEntry"
             app:destination="@id/newEntry" />
+        <action
+            android:id="@+id/action_mainScreen_to_settings2"
+            app:destination="@id/settings2" />
+        <action
+            android:id="@+id/action_mainScreen_to_showDetails2"
+            app:destination="@id/showDetails2" />
     </fragment>
     <fragment
         android:id="@+id/newEntry"
         android:name="sk.tuke.archivator.NewEntry"
         android:label="fragment_new_entry"
         tools:layout="@layout/fragment_new_entry" />
+    <fragment
+        android:id="@+id/settings2"
+        android:name="sk.tuke.archivator.Settings"
+        android:label="Settings" />
+    <fragment
+        android:id="@+id/showDetails2"
+        android:name="sk.tuke.archivator.ShowDetails"
+        android:label="fragment_show_details2"
+        tools:layout="@layout/fragment_show_details2" />
 </navigation>
