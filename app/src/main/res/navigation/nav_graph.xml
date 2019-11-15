@@ -23,7 +23,7 @@
             android:id="@+id/action_mainScreen_to_newEntry"
             app:destination="@id/newEntry" />
         <action
-            android:id="@+id/action_mainScreen_to_settings2"
+            android:id="@+id/action_mainScreen_to_settings"
             app:destination="@id/settings2" />
         <action
             android:id="@+id/action_mainScreen_to_showDetails2"
@@ -42,5 +42,5 @@
         android:id="@+id/showDetails2"
         android:name="sk.tuke.archivator.ShowDetails"
         android:label="fragment_show_details2"
-        tools:layout="@layout/fragment_show_details2" />
+        tools:layout="@layout/fragment_show_details" />
 </navigation>

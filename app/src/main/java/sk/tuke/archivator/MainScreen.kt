@@ -27,7 +27,7 @@ class MainScreen : Fragment() {
         }
 
         view.button_settings.setOnClickListener {
-            view.findNavController().navigate(R.id.action_mainScreen_to_settings2)
+            view.findNavController().navigate(R.id.action_mainScreen_to_settings)
         }
 
         return view
