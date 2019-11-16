@@ -3,6 +3,20 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/login"
+            android:checkable="false"
+            android:icon="@android:drawable/ic_lock_idle_lock"
             android:title="Login" />
+        <item
+            android:id="@+id/mainScreen"
+            android:checkable="false"
+            android:icon="@android:drawable/btn_star"
+            android:title="Main Screen" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/settings"
+            android:checkable="false"
+            android:icon="@android:drawable/ic_menu_preferences"
+            android:title="Settings" />
     </group>
 </menu>
