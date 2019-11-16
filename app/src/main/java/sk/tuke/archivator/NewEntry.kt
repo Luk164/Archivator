@@ -14,6 +14,7 @@ import android.app.Activity.RESULT_OK
 import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
+import java.text.SimpleDateFormat
 
 
 /**
@@ -21,18 +22,15 @@ import android.widget.ImageView
  */
 class NewEntry : Fragment() {
 
-    private val entry: ItemKT = ItemKT()
-    val PICK_IMAGE_MULTIPLE = 1
+    private val entry: Item = Item()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_new_entry, container, false)
 
         view.button_add_entry.setOnClickListener {
-            //            val item : ItemKT = ItemKT(view.text_name.text.toString(), view.text_date.text)
+            //            val item : Item = Item(view.text_name.text.toString(), view.text_date.text)
         }
 
         view.button_image.setOnClickListener {
@@ -46,11 +44,10 @@ class NewEntry : Fragment() {
         super.onResume()
 
         text_date.setOnClickListener {
-            val dpd = DatePickerDialog(activity!!)
-            dpd.setOnDateSetListener { view, year, month, dayOfMonth ->
+            val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 entry.Date.set(year, month, dayOfMonth)
-                text_date.setText(Global.dateFormatter().format(entry.Date))
-            }
+                text_date.setText(Global.dateFormatter.format(entry.Date.time))
+            }, 2019, 1, 1)
 
             dpd.show()
         }
@@ -61,27 +58,15 @@ class NewEntry : Fragment() {
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "image/*"
-        startActivityForResult(intent, Global.GALLERY_REQUEST_CODE())
+        startActivityForResult(intent, Global.GALLERY_REQUEST_CODE)
     }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        // Result code is RESULT_OK only if the user selects an Image
-//        if (resultCode == Activity.RESULT_OK)
-//            when (requestCode) {
-//                Global.GALLERY_REQUEST_CODE() -> {
-//                    //data.getData returns the content URI for the selected Image
-//                    val selectedImage = data!!.data
-//                    imageView_entry.setImageURI(selectedImage)
-//                }
-//            }
-//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         super.onActivityResult(requestCode, resultCode, data)
 
         // When an Image is picked
-        if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == RESULT_OK && data != null) {
+        if (requestCode == Global.GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             if (data.clipData != null) {
                 for (i in 0 until data.clipData!!.itemCount) //ugly as sin but cant be done better
                 {
