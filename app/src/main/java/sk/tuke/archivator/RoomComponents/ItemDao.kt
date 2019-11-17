@@ -1,5 +1,6 @@
-package sk.tuke.archivator.Interfaces
+package sk.tuke.archivator.RoomComponents
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -10,6 +11,9 @@ import sk.tuke.archivator.Entities.Item
 interface ItemDao {
     @Query("SELECT * FROM items")
     fun getAll(): List<Item>
+
+    @Query("SELECT * FROM items")
+    fun getAllLive(): LiveData<List<Item>>
 
     @Query("SELECT * FROM items WHERE ID IN (:itemIds)")
     fun loadAllByIds(itemIds: IntArray): List<Item>

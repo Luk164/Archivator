@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_main.*
+import sk.tuke.archivator.RoomComponents.AppDatabase
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         Global.dateFormatter = SimpleDateFormat("yyyy.MM.dd G", Locale.getDefault())
-        Global.db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "Archivator").build()
+        Global.db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "Archivator").fallbackToDestructiveMigration().build() //check
 
         setContentView(R.layout.activity_main)
 

@@ -1,13 +1,11 @@
-package sk.tuke.archivator
+package sk.tuke.archivator.RoomComponents
 
 import android.net.Uri
 import androidx.room.TypeConverter
-import com.google.gson.Gson
 import java.util.*
 import kotlin.collections.ArrayList
 import com.google.gson.reflect.TypeToken
-import java.util.Collections.emptyList
-
+import sk.tuke.archivator.Global
 
 
 class Converters {

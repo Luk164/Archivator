@@ -6,21 +6,21 @@ import androidx.room.*
 
 //class Item(_name: String = "N/A", _date: Calendar = Calendar.getInstance(), _description: String = "N/A") {
 //    public val Name : String = _name
-//    public val Date : Calendar = _date
-//    public val Description : String = _description
+//    public val date : Calendar = _date
+//    public val desc : String = _description
 //}
 
 @Entity(tableName = "items")
 data class Item(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(name = "name") val name: String = "",
-    @ColumnInfo(name = "AcquisitionDate") val Date: Calendar = Calendar.getInstance(),
-    @ColumnInfo(name = "Description") val Description: String = "",
-    @ColumnInfo(name = "Images") val Images: List<Uri> = ArrayList())
+    @ColumnInfo(name = "name") var name: String = "",
+    @ColumnInfo(name = "AcquisitionDate") val date: Calendar = Calendar.getInstance(),
+    @ColumnInfo(name = "desc") var desc: String = "",
+    @ColumnInfo(name = "images") val images: List<Uri> = ArrayList())
 {
     fun checkValid(): Boolean
     {
-        if (name.isNotBlank() && Description.isNotBlank() && id==0)
+        if (name.isNotBlank() && desc.isNotBlank() && id==0)
         {
             return true
         }

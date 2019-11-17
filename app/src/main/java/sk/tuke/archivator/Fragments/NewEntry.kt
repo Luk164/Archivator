@@ -12,8 +12,10 @@ import kotlinx.android.synthetic.main.fragment_new_entry.*
 import android.content.Intent
 import android.app.Activity.RESULT_OK
 import android.net.Uri
+import android.os.AsyncTask
 import android.util.Log
 import android.widget.ImageView
+import androidx.navigation.findNavController
 import sk.tuke.archivator.Entities.Item
 import sk.tuke.archivator.Global
 import sk.tuke.archivator.R
@@ -32,9 +34,16 @@ class NewEntry : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_new_entry, container, false)
 
         view.button_add_entry.setOnClickListener {
+            entry.name = text_name.text.toString()
+            entry.desc = text_desc.text.toString()
+
             if(entry.checkValid())
             {
-                Global.db.itemDao().insertAll(entry)
+                AsyncTask.execute {
+                    Global.db.itemDao().insertAll(entry)
+                }
+
+                view.findNavController().popBackStack()
             }
         }
 
@@ -50,8 +59,8 @@ class NewEntry : Fragment() {
 
         text_date.setOnClickListener {
             val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                entry.Date.set(year, month, dayOfMonth)
-                text_date.setText(Global.dateFormatter.format(entry.Date.time)) //weird way to do it but it works. There were problems with android.icu implementation
+                entry.date.set(year, month, dayOfMonth)
+                text_date.setText(Global.dateFormatter.format(entry.date.time)) //weird way to do it but it works. There were problems with android.icu implementation
             }, 2019, 1, 1)
 
             dpd.show()
