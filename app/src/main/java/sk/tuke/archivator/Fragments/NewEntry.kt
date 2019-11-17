@@ -1,4 +1,4 @@
-package sk.tuke.archivator
+package sk.tuke.archivator.Fragments
 
 
 import android.os.Bundle
@@ -14,7 +14,9 @@ import android.app.Activity.RESULT_OK
 import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
-import java.text.SimpleDateFormat
+import sk.tuke.archivator.Entities.Item
+import sk.tuke.archivator.Global
+import sk.tuke.archivator.R
 
 
 /**
@@ -30,7 +32,10 @@ class NewEntry : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_new_entry, container, false)
 
         view.button_add_entry.setOnClickListener {
-            //            val item : Item = Item(view.text_name.text.toString(), view.text_date.text)
+            if(entry.checkValid())
+            {
+                Global.db.itemDao().insertAll(entry)
+            }
         }
 
         view.button_image.setOnClickListener {
@@ -46,7 +51,7 @@ class NewEntry : Fragment() {
         text_date.setOnClickListener {
             val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 entry.Date.set(year, month, dayOfMonth)
-                text_date.setText(Global.dateFormatter.format(entry.Date.time))
+                text_date.setText(Global.dateFormatter.format(entry.Date.time)) //weird way to do it but it works. There were problems with android.icu implementation
             }, 2019, 1, 1)
 
             dpd.show()

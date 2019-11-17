@@ -1,4 +1,4 @@
-package sk.tuke.archivator
+package sk.tuke.archivator.Fragments
 
 
 import android.os.Bundle
@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import androidx.navigation.navOptions
-import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import sk.tuke.archivator.R
 
 /**
  * A simple [Fragment] subclass.

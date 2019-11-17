@@ -50,6 +50,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
 
     implementation 'androidx.preference:preference:1.1.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation "androidx.work:work-runtime-ktx:2.2.0"
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
@@ -62,21 +64,21 @@ dependencies {
     // optional - ReactiveStreams support for LiveData
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.1.0"
 
-    // optional - Test helpers for LiveData
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
-
     implementation "androidx.room:room-runtime:2.2.1"
-    kapt "androidx.room:room-compiler:2.2.1" // For Kotlin use kapt instead of annotationProcessor
+    kapt "androidx.room:room-compiler:2.2.1" // For Kotlin use kapt
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:2.2.1"
 
     // Test helpers
     testImplementation "androidx.room:room-testing:2.2.1"
+    androidTestImplementation "androidx.work:work-testing:2.2.0"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     //Auto added
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+
 
 
 }
