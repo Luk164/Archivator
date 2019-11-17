@@ -5,8 +5,8 @@ import sk.tuke.archivator.RoomComponents.AppDatabase
 import java.text.SimpleDateFormat
 
 object Global {
-    val GALLERY_REQUEST_CODE = 1
+    const val GALLERY_REQUEST_CODE = 1
     lateinit var dateFormatter : SimpleDateFormat
-    lateinit var db : AppDatabase
+    lateinit var db : AppDatabase //deleteme to be replaced by getDatabase
     val gson = Gson()
 }

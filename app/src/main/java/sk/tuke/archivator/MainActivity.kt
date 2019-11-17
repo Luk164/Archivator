@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         Global.dateFormatter = SimpleDateFormat("yyyy.MM.dd G", Locale.getDefault())
-        Global.db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "Archivator").fallbackToDestructiveMigration().build() //check
+        Global.db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "ArchivatorDB").fallbackToDestructiveMigration().build() //deleteme To be replaced by getDatabase in AppDatabase
 
         setContentView(R.layout.activity_main)
 
@@ -34,6 +34,5 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.login, R.id.mainScreen), drawer_layout)
         toolbar.setupWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
-
     }
 }

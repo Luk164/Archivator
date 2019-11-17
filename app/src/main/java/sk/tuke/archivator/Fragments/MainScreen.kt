@@ -38,7 +38,7 @@ class MainScreen : Fragment() {
         super.onStart()
 //        dbOutput.text = Global.db.itemDao().getAllLive()
         val observer = Observer<List<Item>> {
-            if (it.isNotEmpty())
+            if (it.isNotEmpty()) //deleteme
             {
                 dbOutput.text = "Success${it[0].name}"
             }

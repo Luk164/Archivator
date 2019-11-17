@@ -43,7 +43,7 @@ class NewEntry : Fragment() {
                     Global.db.itemDao().insertAll(entry)
                 }
 
-                view.findNavController().popBackStack()
+                view.findNavController().popBackStack() //end fragment after adding to database
             }
         }
 
