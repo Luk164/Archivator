@@ -42,15 +42,13 @@ class NewEntry : Fragment() {
 
             if(entry.checkValid())
             {
-//                AsyncTask.execute {
-//                    AppDatabase.getDatabase(activity!!).itemDao().insertAll(entry)
-//                }
+                AsyncTask.execute {
+                    AppDatabase.getDatabase(activity!!).itemDao().insertAll(entry)
+                }
 
                 val model = activity?.run {
                     ViewModelProviders.of(this)[ItemViewModel::class.java]
                 } ?: throw Exception("Invalid Activity")
-
-                model.insert(entry)
 
                 view.findNavController().popBackStack() //end fragment after adding to database
             }
