@@ -21,29 +21,29 @@ class Converters {
         return calendar?.timeInMillis
     }
 
-    @TypeConverter
-    fun uriToString(uri: Uri?): String
-    {
-        return uri.toString()
-    }
-
-    @TypeConverter
-    fun stringToUri(string: String): Uri
-    {
-        return Uri.parse(string)
-    }
-
-    @TypeConverter
-    fun ListToString(list: ArrayList<Uri>): String
-    {
-        return ""
-    }
-
-    @TypeConverter
-    fun StringToList(string: String): ArrayList<Uri>
-    {
-        return ArrayList()
-    }
+//    @TypeConverter
+//    fun uriToString(uri: Uri?): String
+//    {
+//        return uri.toString()
+//    }
+//
+//    @TypeConverter
+//    fun stringToUri(string: String): Uri
+//    {
+//        return Uri.parse(string)
+//    }
+//
+//    @TypeConverter
+//    fun ListToString(list: ArrayList<Uri>): String
+//    {
+//        return ""
+//    }
+//
+//    @TypeConverter
+//    fun StringToList(string: String): ArrayList<Uri>
+//    {
+//        return ArrayList()
+//    }
 
     @TypeConverter
     fun stringToSomeObjectList(data: String?): List<Uri> {
