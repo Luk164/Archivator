@@ -15,10 +15,13 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.util.Log
 import android.widget.ImageView
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import sk.tuke.archivator.Entities.Item
 import sk.tuke.archivator.Global
 import sk.tuke.archivator.R
+import sk.tuke.archivator.RoomComponents.AppDatabase
+import sk.tuke.archivator.ViewModels.ItemViewModel
 
 
 /**
@@ -39,9 +42,15 @@ class NewEntry : Fragment() {
 
             if(entry.checkValid())
             {
-                AsyncTask.execute {
-                    Global.db.itemDao().insertAll(entry)
-                }
+//                AsyncTask.execute {
+//                    AppDatabase.getDatabase(activity!!).itemDao().insertAll(entry)
+//                }
+
+                val model = activity?.run {
+                    ViewModelProviders.of(this)[ItemViewModel::class.java]
+                } ?: throw Exception("Invalid Activity")
+
+                model.insert(entry)
 
                 view.findNavController().popBackStack() //end fragment after adding to database
             }

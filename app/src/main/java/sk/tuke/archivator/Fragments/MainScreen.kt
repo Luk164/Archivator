@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_main_screen.*
 import kotlinx.android.synthetic.main.fragment_main_screen.view.*
 import sk.tuke.archivator.Entities.Item
 import sk.tuke.archivator.Global
 import sk.tuke.archivator.R
+import sk.tuke.archivator.RoomComponents.AppDatabase
+import sk.tuke.archivator.ViewModels.ItemViewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -36,7 +39,7 @@ class MainScreen : Fragment() {
 
     override fun onStart() {
         super.onStart()
-//        dbOutput.text = Global.db.itemDao().getAllLive()
+//        dbOutput.text = Global.db.itemDao().getAll()
         val observer = Observer<List<Item>> {
             if (it.isNotEmpty()) //deleteme
             {
@@ -44,6 +47,10 @@ class MainScreen : Fragment() {
             }
         }
 
-        Global.db.itemDao().getAllLive().observe(this, observer)
+        val model = activity?.run {
+            ViewModelProviders.of(this)[ItemViewModel::class.java]
+        } ?: throw Exception("Invalid Activity")
+
+        model.allItemsLive.observe(this, observer)
     }
 }

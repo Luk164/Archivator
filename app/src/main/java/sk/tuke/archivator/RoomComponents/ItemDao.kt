@@ -10,19 +10,19 @@ import sk.tuke.archivator.Entities.Item
 @Dao
 interface ItemDao {
     @Query("SELECT * FROM items")
-    fun getAll(): List<Item>
-
-    @Query("SELECT * FROM items")
-    fun getAllLive(): LiveData<List<Item>>
+    fun getAll(): LiveData<List<Item>>
 
     @Query("SELECT * FROM items WHERE ID IN (:itemIds)")
-    fun loadAllByIds(itemIds: IntArray): List<Item>
+    fun getAllByIds(itemIds: IntArray): LiveData<List<Item>>
 
     @Query("SELECT * FROM items WHERE name LIKE :name LIMIT 1")
-    fun findByName(name: String): Item
+    fun findByName(name: String): LiveData<Item>
 
     @Insert
     fun insertAll(vararg items: Item)
+
+    @Insert
+    fun insert(item: Item)
 
     @Delete
     fun delete(item: Item)
