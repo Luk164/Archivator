@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import sk.tuke.archivator.R
+import sk.tuke.archivator.VolleyNetworkManager
 
 /**
  * A simple [Fragment] subclass.
@@ -28,5 +30,12 @@ class Login : Fragment() {
         }
 
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val vnm = VolleyNetworkManager(activity!!)
+        button_test.setOnClickListener { vnm.testCall() }
     }
 }
