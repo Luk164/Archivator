@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/login"
-        android:name="sk.tuke.archivator.Login"
+        android:name="sk.tuke.archivator.Fragments.Login"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainScreen"
-        android:name="sk.tuke.archivator.MainScreen"
+        android:name="sk.tuke.archivator.Fragments.MainScreen"
         android:label="fragment_main_screen"
         tools:layout="@layout/fragment_main_screen" >
         <action
@@ -26,12 +26,12 @@
             android:id="@+id/action_mainScreen_to_settings"
             app:destination="@id/settings" />
         <action
-            android:id="@+id/action_mainScreen_to_showDetails2"
+            android:id="@+id/action_mainScreen_to_showDetails"
             app:destination="@id/showDetails" />
     </fragment>
     <fragment
         android:id="@+id/newEntry"
-        android:name="sk.tuke.archivator.NewEntry"
+        android:name="sk.tuke.archivator.Fragments.NewEntry"
         android:label="fragment_new_entry"
         tools:layout="@layout/fragment_new_entry" />
     <fragment
@@ -40,7 +40,12 @@
         android:label="Settings" />
     <fragment
         android:id="@+id/showDetails"
-        android:name="sk.tuke.archivator.ShowDetails"
+        android:name="sk.tuke.archivator.Fragments.ShowDetails"
         android:label="fragment_show_details"
-        tools:layout="@layout/fragment_show_details" />
+        tools:layout="@layout/fragment_show_details" >
+        <argument
+            android:name="ID"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 </navigation>

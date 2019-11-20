@@ -2,22 +2,25 @@ package sk.tuke.archivator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
-
-class VM : ViewModel()
-{
-
-}
+import sk.tuke.archivator.ViewModels.ItemViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var itemViewModel: ItemViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Global.dateFormatter = SimpleDateFormat("yyyy.MM.dd G", Locale.getDefault())
         setContentView(R.layout.activity_main)
+        itemViewModel = ViewModelProviders.of(this)[ItemViewModel::class.java]
 
         setSupportActionBar(toolbar)
 
