@@ -19,6 +19,7 @@
             android:layout_marginBottom="32dp"
             android:clickable="true"
             android:src="@android:drawable/ic_menu_edit"
+            app:backgroundTint="#3F51B5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -53,7 +54,7 @@
                     android:autofillHints="date"
                     android:ems="10"
                     android:focusable="false"
-                    android:hint="DD/MM/YYYY"
+                    android:hint="DD/MM/YYYY ERA"
                     android:inputType="date" />
 
                 <Button

@@ -11,10 +11,10 @@ import android.app.DatePickerDialog
 import kotlinx.android.synthetic.main.fragment_new_entry.*
 import android.content.Intent
 import android.app.Activity.RESULT_OK
-import android.net.Uri
 import android.os.AsyncTask
 import android.util.Log
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import sk.tuke.archivator.Entities.Item
@@ -40,8 +40,9 @@ class NewEntry : Fragment() {
             entry.name = text_name.text.toString()
             entry.desc = text_desc.text.toString()
 
-            if(entry.checkValid())
+            if(entry.checkValid(activity!!))
             {
+                //fixme
                 AsyncTask.execute {
                     AppDatabase.getDatabase(activity!!).itemDao().insertAll(entry)
                 }
@@ -86,28 +87,32 @@ class NewEntry : Fragment() {
 
         super.onActivityResult(requestCode, resultCode, data)
 
+        val imgSwitcher = ImageView(activity)
         // When an Image is picked
         if (requestCode == Global.GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            if (data.clipData != null) {
-                for (i in 0 until data.clipData!!.itemCount) //ugly as sin but cant be done better
+            when {
+                //multiple images
+                data.clipData != null -> for (i in 0 until data.clipData!!.itemCount) //ugly as sin but cant be done better
                 {
-                    val imgSwitcher = ImageView(activity)
                     imgSwitcher.setImageURI(data.clipData!!.getItemAt(i).uri)
                     imgSwitcher.setOnClickListener {
-                        //                        LabelButton.this.getParent().removeView(LabelButton.this);
                         scrollView_layout.removeView(imgSwitcher)
                     }
                     scrollView_layout.addView(imgSwitcher)
                 }
-            }
-            else if (data.data != null)
-            {
-                val imagePath: Uri = data.data!!
-                Log.e("imagePath", imagePath.toString())
-            }
-            else
-            {
-                Log.e("Image selection failed", "Did you not select any image?")
+                //Single image
+                data.data != null -> {
+                    imgSwitcher.setImageURI(data.data!!)
+                    imgSwitcher.setOnClickListener {
+                        scrollView_layout.removeView(imgSwitcher)
+                    }
+                    scrollView_layout.addView(imgSwitcher)
+                }
+                else ->
+                {
+                    Log.e("Image selection failed", "Did you not select any image?")
+                    Toast.makeText(activity!!, "No image selected!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

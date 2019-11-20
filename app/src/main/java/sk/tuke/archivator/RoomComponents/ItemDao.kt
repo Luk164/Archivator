@@ -15,6 +15,9 @@ interface ItemDao {
     @Query("SELECT * FROM items WHERE ID IN (:itemIds)")
     fun getAllByIds(itemIds: IntArray): LiveData<List<Item>>
 
+    @Query("SELECT * FROM items WHERE ID == :itemId")
+    fun getOneById(itemId: Int): LiveData<Item>
+
     @Query("SELECT * FROM items WHERE name LIKE :name LIMIT 1")
     fun findByName(name: String): LiveData<Item>
 

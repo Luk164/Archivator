@@ -1,13 +1,34 @@
-<PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreferenceCompat
-        app:key="notifications"
-        app:title="Enable message notifications"/>
+    <PreferenceCategory android:title="Theme Settings">
+        <SwitchPreferenceCompat
+            app:key="DarkMode"
+            app:title="Dark Theme"
+            app:summary="Switch base theme to dark theme"/>
+        <EditTextPreference
+            app:key="SettingColorPrimary"
+            app:title="Primary color"
+            />
+        <EditTextPreference
+            app:key="SettingColorSecondary"
+            app:title="Accent color"
+            />
+        <EditTextPreference
+            app:key="SettingColorPrimaryDark"
+            app:title="Primary dark color"
+            />
+        <EditTextPreference
+            app:key="SettingColorText"
+            app:title="Text color"
+            />
+    </PreferenceCategory>
 
+    <PreferenceCategory android:title="Other">
     <Preference
         app:key="feedback"
         app:title="Send feedback"
         app:summary="Report technical issues or suggest new features"/>
+    </PreferenceCategory>
 
 </PreferenceScreen>

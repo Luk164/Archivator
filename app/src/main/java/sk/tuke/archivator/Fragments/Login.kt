@@ -31,11 +31,4 @@ class Login : Fragment() {
 
         return view
     }
-
-    override fun onStart() {
-        super.onStart()
-
-        val vnm = VolleyNetworkManager(activity!!)
-        button_test.setOnClickListener { vnm.testCall() }
-    }
 }

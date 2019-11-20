@@ -7,17 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.fragment_main_screen.*
 import kotlinx.android.synthetic.main.fragment_main_screen.view.*
-import sk.tuke.archivator.Entities.Item
-import sk.tuke.archivator.Global
 import sk.tuke.archivator.R
-import sk.tuke.archivator.RoomComponents.AppDatabase
 import sk.tuke.archivator.RoomComponents.ItemListAdapter
 import sk.tuke.archivator.ViewModels.ItemViewModel
 
@@ -38,6 +33,11 @@ class MainScreen : Fragment() {
             view.findNavController().navigate(R.id.action_mainScreen_to_newEntry)
         }
 
+        view.button_test.setOnClickListener {
+            val action = MainScreenDirections.actionMainScreenToShowDetails(1)
+            view.findNavController().navigate(action)
+        }
+
         return view
     }
 
@@ -53,7 +53,6 @@ class MainScreen : Fragment() {
         } ?: throw Exception("Invalid Activity")
 
         itemViewModel.itemDao.getAll().observe(this, Observer { items ->
-            // Update the cached copy of the words in the adapter.
             items?.let { adapter.setWords(it) }
         })
     }
