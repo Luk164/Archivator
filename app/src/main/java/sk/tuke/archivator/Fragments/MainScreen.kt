@@ -33,11 +33,6 @@ class MainScreen : Fragment() {
             view.findNavController().navigate(R.id.action_mainScreen_to_newEntry)
         }
 
-        view.button_test.setOnClickListener {
-            val action = MainScreenDirections.actionMainScreenToShowDetails(1)
-            view.findNavController().navigate(action)
-        }
-
         return view
     }
 
@@ -53,7 +48,7 @@ class MainScreen : Fragment() {
         } ?: throw Exception("Invalid Activity")
 
         itemViewModel.itemDao.getAll().observe(this, Observer { items ->
-            items?.let { adapter.setWords(it) }
+            items?.let { adapter.setItems(it) }
         })
     }
 }

@@ -18,7 +18,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:clickable="true"
-            android:src="@android:drawable/ic_menu_edit"
+            android:src="@android:drawable/ic_menu_save"
             app:backgroundTint="#3F51B5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -39,7 +39,8 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="Name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:importantForAutofill="no" />
 
                 <MultiAutoCompleteTextView
                     android:id="@+id/text_desc"
@@ -61,6 +62,7 @@
                     android:id="@+id/button_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@android:drawable/ic_menu_gallery"
                     android:text="Add Image" />
 
             </LinearLayout>

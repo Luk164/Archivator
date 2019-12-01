@@ -29,4 +29,7 @@ interface ItemDao {
 
     @Delete
     fun delete(item: Item)
+
+    @Query("DELETE FROM items WHERE id = (:itemId)")
+    fun delete(itemId: Int)
 }
