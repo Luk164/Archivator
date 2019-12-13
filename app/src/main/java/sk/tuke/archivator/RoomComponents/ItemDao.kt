@@ -21,6 +21,9 @@ interface ItemDao {
     @Query("SELECT * FROM items WHERE name LIKE :name LIMIT 1")
     fun findByName(name: String): LiveData<Item>
 
+    @Query("SELECT COUNT(id) FROM items")
+    fun getItemCount(): LiveData<Int>
+
     @Insert
     fun insertAll(vararg items: Item)
 

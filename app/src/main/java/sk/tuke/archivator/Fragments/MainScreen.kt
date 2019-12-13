@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_main_screen.*
 import kotlinx.android.synthetic.main.fragment_main_screen.view.*
+import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
 import sk.tuke.archivator.RoomComponents.ItemListAdapter
 import sk.tuke.archivator.ViewModels.ItemViewModel
@@ -50,5 +51,10 @@ class MainScreen : Fragment() {
         itemViewModel.itemDao.getAll().observe(this, Observer { items ->
             items?.let { adapter.setItems(it) }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as MainActivity).title = "Login"
     }
 }

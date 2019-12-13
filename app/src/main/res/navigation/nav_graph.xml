@@ -23,9 +23,6 @@
             android:id="@+id/action_mainScreen_to_newEntry"
             app:destination="@id/newEntry" />
         <action
-            android:id="@+id/action_mainScreen_to_settings"
-            app:destination="@id/settings" />
-        <action
             android:id="@+id/action_mainScreen_to_showDetails"
             app:destination="@id/showDetails" />
     </fragment>
@@ -48,4 +45,9 @@
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
+    <fragment
+        android:id="@+id/bluetoothFragment"
+        android:name="sk.tuke.archivator.Fragments.BluetoothFragment"
+        android:label="fragment_bluetooth"
+        tools:layout="@layout/fragment_bluetooth" />
 </navigation>
