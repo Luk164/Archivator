@@ -1,6 +1,7 @@
 package sk.tuke.archivator.Fragments
 
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.os.AsyncTask
 import android.os.Bundle
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_show_details.*
+import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
 import sk.tuke.archivator.RoomComponents.AppDatabase
 import sk.tuke.archivator.ViewModels.ItemViewModel
@@ -34,11 +36,13 @@ class ShowDetails : Fragment() {
         return inflater.inflate(R.layout.fragment_show_details, container, false)
     }
 
+    //@SuppressLint("SetTextI18n")
+    //TODO FIXME
     override fun onStart() {
         super.onStart()
 
         val amount = args.ID
-        tv_id.text = "Item id passed is ${amount}"
+        tv_id.text = "Item id passed is $amount"
 
         val itemViewModel = activity?.run {
             ViewModelProviders.of(this)[ItemViewModel::class.java]
@@ -50,6 +54,11 @@ class ShowDetails : Fragment() {
                 tv_desc.text = "Description:\n  ${it.desc}"
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as MainActivity).title = "Login"
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

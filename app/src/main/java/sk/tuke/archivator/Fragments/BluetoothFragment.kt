@@ -1,4 +1,4 @@
-package sk.tuke.archivator
+package sk.tuke.archivator.Fragments
 
 
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import sk.tuke.archivator.R
 
 /**
  * A simple [Fragment] subclass.

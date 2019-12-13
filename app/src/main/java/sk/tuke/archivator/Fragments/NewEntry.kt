@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import sk.tuke.archivator.Entities.Item
 import sk.tuke.archivator.Global
+import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
 import sk.tuke.archivator.RoomComponents.AppDatabase
 import sk.tuke.archivator.ViewModels.ItemViewModel
@@ -64,6 +65,7 @@ class NewEntry : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        (requireActivity() as MainActivity).title = "Login"
 
         text_date.setOnClickListener {
             val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
