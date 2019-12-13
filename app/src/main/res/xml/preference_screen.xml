@@ -17,6 +17,11 @@
         app:key="setting_feedback"
         app:title="Send feedback"
         app:summary="Report technical issues or suggest new features"/>
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_pref_simple_compass"
+            android:title="Simple compass"
+            android:summary="Use simplified compass? (N, S, E, W)"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
