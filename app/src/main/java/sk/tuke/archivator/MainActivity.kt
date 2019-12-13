@@ -1,5 +1,6 @@
 package sk.tuke.archivator
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.hardware.Sensor
 import android.hardware.Sensor.TYPE_ACCELEROMETER
@@ -7,7 +8,10 @@ import android.hardware.Sensor.TYPE_MAGNETIC_FIELD
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.hardware.camera2.CameraManager
 import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -18,9 +22,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 import sk.tuke.archivator.ViewModels.AppViewModel
 import sk.tuke.archivator.ViewModels.ItemViewModel
+import java.lang.Exception
 import java.lang.Math.toDegrees
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
@@ -66,6 +72,26 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         toolbar.setupWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
 
+//        val cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
+//        val cameraId = cameraManager.cameraIdList[0]
+        nav_view.getHeaderView(0).sw_flashlight.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked)
+            {
+//                try {
+//                    cameraManager.setTorchMode(cameraId, true)
+//                } catch (exception: Exception) {
+//                }
+            }
+            else
+            {
+//                try {
+//                    cameraManager.setTorchMode(cameraId, false)
+//
+//                } catch (e: Exception) {
+//                }
+            }
+        }
+
         appViewModel.username.observe(this, androidx.lifecycle.Observer {
             nav_view.getHeaderView(0).tv_username.text = it
         })
@@ -92,20 +118,23 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     override fun onStop() {
         super.onStop()
 
+        sensorManager.unregisterListener(this, accelerometer)
+        sensorManager.unregisterListener(this, magnetometer)
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(listener)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onSensorChanged(event: SensorEvent) {
-        if (event.sensor === accelerometer) {
-            lowPass(event.values, lastAccelerometer)
-            lastAccelerometerSet = true
-        } else if (event.sensor === magnetometer) {
-            lowPass(event.values, lastMagnetometer)
-            lastMagnetometerSet = true
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event != null) {
+            if (event.sensor === accelerometer) {
+                lowPass(event.values, lastAccelerometer)
+                lastAccelerometerSet = true
+            } else if (event.sensor === magnetometer) {
+                lowPass(event.values, lastMagnetometer)
+                lastMagnetometerSet = true
+            }
         }
 
         if (lastAccelerometerSet && lastMagnetometerSet) {
@@ -115,9 +144,61 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 SensorManager.getOrientation(r, orientation)
                 val degree = (toDegrees(orientation[0].toDouble()) + 360).toFloat() % 360
 
-                currentDegree = -degree
-
-                nav_view.getHeaderView(0).tv_heading
+                if (sharedPrefs.getBoolean("switch_pref_simple_compass", true)) //4 wind rose
+                {
+                    if (315 < degree && degree <= 45)
+                    {
+                        nav_view.getHeaderView(0).tv_heading.text = "N"
+                    }
+                    else if (45 < degree && degree <= 135)
+                    {
+                        nav_view.getHeaderView(0).tv_heading.text = "E"
+                    }
+                    else if (135 < degree && degree <= 225)
+                    {
+                        nav_view.getHeaderView(0).tv_heading.text = "S"
+                    }
+                    else if (225 < degree && degree <= 315)
+                    {
+                        nav_view.getHeaderView(0).tv_heading.text = "W"
+                    }
+                }
+                else //16 wind rose
+                {
+                    if (348.75 < degree && degree <= 11.25) {
+                        nav_view.getHeaderView(0).tv_heading.text = "N"
+                    } else if (11.25 < degree && degree <= 33.75) {
+                        nav_view.getHeaderView(0).tv_heading.text = "NNE"
+                    } else if (33.75 < degree && degree <= 56.25) {
+                        nav_view.getHeaderView(0).tv_heading.text = "NE"
+                    } else if (56.25 < degree && degree <= 78.75) {
+                        nav_view.getHeaderView(0).tv_heading.text = "ENE"
+                    } else if (75.75 < degree && degree <= 101.25) {
+                        nav_view.getHeaderView(0).tv_heading.text = "E"
+                    } else if (101.25 < degree && degree <= 123.75) {
+                        nav_view.getHeaderView(0).tv_heading.text = "ESE"
+                    } else if (123.75 < degree && degree <= 146.25) {
+                        nav_view.getHeaderView(0).tv_heading.text = "SE"
+                    } else if (146.25 < degree && degree <= 168.75) {
+                        nav_view.getHeaderView(0).tv_heading.text = "SSE"
+                    } else if (168.75 < degree && degree <= 191.25) {
+                        nav_view.getHeaderView(0).tv_heading.text = "S"
+                    } else if (191.25 < degree && degree <= 213.75) {
+                        nav_view.getHeaderView(0).tv_heading.text = "SSW"
+                    } else if (213.75 < degree && degree <= 236.25) {
+                        nav_view.getHeaderView(0).tv_heading.text = "SW"
+                    } else if (236.25 < degree && degree <= 258.75) {
+                        nav_view.getHeaderView(0).tv_heading.text = "WSW"
+                    } else if (258.75 < degree && degree <= 281.25) {
+                        nav_view.getHeaderView(0).tv_heading.text = "W"
+                    } else if (281.25 < degree && degree <= 303.75) {
+                        nav_view.getHeaderView(0).tv_heading.text = "WNW"
+                    } else if (303.75 < degree && degree <= 326.25) {
+                        nav_view.getHeaderView(0).tv_heading.text = "NW"
+                    } else if (326.25 < degree && degree <= 348.75) {
+                        nav_view.getHeaderView(0).tv_heading.text = "NNW"
+                    }
+                }
             }
         }
     }
