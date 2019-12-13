@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/nav_header_background"
-    android:paddingTop="15dp">
+    android:paddingTop="20dp">
 
     <ImageView
         android:id="@+id/imageView"
@@ -45,23 +45,23 @@
         android:id="@+id/tv_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:text="N"
         android:textSize="50sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_username"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/sw_flashlight" />
 
     <Switch
         android:id="@+id/sw_flashlight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:switchPadding="5dp"
-        android:text="Flashlight"
+        android:text="Light"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
