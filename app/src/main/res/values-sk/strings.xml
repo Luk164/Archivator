@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Archivator</string>
+    <string name="add_image">Pridať obrázok</string>
+    <string name="app_logo">Logo</string>
+    <string name="description">Popis</string>
+    <string name="email">Email</string>
+    <string name="light">Svetlo</string>
+    <string name="login">Prihlásenie</string>
+    <string name="n_a">N/A</string>
+    <string name="name">Meno</string>
+    <string name="password">Heslo</string>
+    <string name="user">Používateľ</string>
+    <string name="username">Používateľ</string>
+    <string name="confirm_delete">Určite chcete tento objekt vymazať?</string>
+    <string name="yes">Áno</string>
+    <string name="upload">Nahrať</string>
+    <string name="no">Nie</string>
+    <string name="cancel">Zrušiť</string>
+    <string name="show_details">Podrobnosti</string>
+    <string name="main_screen">Hlavná obrazovnka</string>
+    <string name="confirm_upload">Chcete nahraž tieto predmety na server?</string>
+    <string name="new_entry">Nový vstup</string>
+    <string name="no_image_selected">Nebol zvolený žiadny obrázok!</string>
+    <string name="item_id_is">"ID vstupu: "</string>
+    <string name="theme">Téma</string>
+    <string name="theme_summary">Vyber si tému aplikácie</string>
+    <string name="compass_setting_title">Jednoduchý kompas</string>
+    <string name="compass_setting_summary">Použiť zjednodušený kompas? (N, S, E, W)</string>
+    <string name="settings">Nastavenia</string>
+</resources>

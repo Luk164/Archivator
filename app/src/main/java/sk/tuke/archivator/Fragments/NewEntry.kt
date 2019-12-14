@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import sk.tuke.archivator.Entities.Item
 import sk.tuke.archivator.Global
+import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
 import sk.tuke.archivator.RoomComponents.AppDatabase
 import sk.tuke.archivator.ViewModels.ItemViewModel
@@ -47,9 +48,9 @@ class NewEntry : Fragment() {
                     AppDatabase.getDatabase(activity!!).itemDao().insertAll(entry)
                 }
 
-                val model = activity?.run {
-                    ViewModelProviders.of(this)[ItemViewModel::class.java]
-                } ?: throw Exception("Invalid Activity")
+//                val model = activity?.run {
+//                    ViewModelProviders.of(this)[ItemViewModel::class.java]
+//                } ?: throw Exception("Invalid Activity")
 
                 view.findNavController().popBackStack() //end fragment after adding to database
             }
@@ -64,6 +65,7 @@ class NewEntry : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        (requireActivity() as MainActivity).title = getString(R.string.new_entry)
 
         text_date.setOnClickListener {
             val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
@@ -111,7 +113,7 @@ class NewEntry : Fragment() {
                 else ->
                 {
                     Log.e("Image selection failed", "Did you not select any image?")
-                    Toast.makeText(activity!!, "No image selected!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity!!, getString(R.string.no_image_selected), Toast.LENGTH_SHORT).show()
                 }
             }
         }

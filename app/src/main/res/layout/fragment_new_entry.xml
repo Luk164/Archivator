@@ -38,14 +38,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Name"
-                    android:inputType="textPersonName" />
+                    android:hint="@string/name"
+                    android:inputType="textPersonName"
+                    android:importantForAutofill="no" />
 
                 <MultiAutoCompleteTextView
                     android:id="@+id/text_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Description" />
+                    android:hint="@string/description" />
 
                 <EditText
                     android:id="@+id/text_date"
@@ -61,7 +62,8 @@
                     android:id="@+id/button_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add Image" />
+                    android:drawableEnd="@android:drawable/ic_menu_gallery"
+                    android:text="@string/add_image" />
 
             </LinearLayout>
         </ScrollView>

@@ -2,33 +2,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="Theme Settings">
-        <SwitchPreferenceCompat
-            app:key="DarkMode"
-            app:title="Dark Theme"
-            app:summary="Switch base theme to dark theme"/>
-        <EditTextPreference
-            app:key="SettingColorPrimary"
-            app:title="Primary color"
-            />
-        <EditTextPreference
-            app:key="SettingColorSecondary"
-            app:title="Accent color"
-            />
-        <EditTextPreference
-            app:key="SettingColorPrimaryDark"
-            app:title="Primary dark color"
-            />
-        <EditTextPreference
-            app:key="SettingColorText"
-            app:title="Text color"
-            />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/styles"
+            android:entryValues="@array/styles"
+            android:key="setting_select_theme"
+            android:title="@string/theme"
+            android:summary="@string/theme_summary"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Other">
-    <Preference
-        app:key="feedback"
-        app:title="Send feedback"
-        app:summary="Report technical issues or suggest new features"/>
+<!--    <Preference-->
+<!--        app:key="setting_feedback"-->
+<!--        app:title="Send feedback"-->
+<!--        app:summary="Report technical issues or suggest new features"/>-->
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_pref_simple_compass"
+            android:title="@string/compass_setting_title"
+            android:summary="@string/compass_setting_summary"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
