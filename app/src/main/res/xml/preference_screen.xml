@@ -8,20 +8,20 @@
             android:entries="@array/styles"
             android:entryValues="@array/styles"
             android:key="setting_select_theme"
-            android:title="Theme"
-            android:summary="Select a different theme"/>
+            android:title="@string/theme"
+            android:summary="@string/theme_summary"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Other">
-    <Preference
-        app:key="setting_feedback"
-        app:title="Send feedback"
-        app:summary="Report technical issues or suggest new features"/>
+<!--    <Preference-->
+<!--        app:key="setting_feedback"-->
+<!--        app:title="Send feedback"-->
+<!--        app:summary="Report technical issues or suggest new features"/>-->
         <SwitchPreference
             android:defaultValue="false"
             android:key="switch_pref_simple_compass"
-            android:title="Simple compass"
-            android:summary="Use simplified compass? (N, S, E, W)"/>
+            android:title="@string/compass_setting_title"
+            android:summary="@string/compass_setting_summary"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

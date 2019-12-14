@@ -12,6 +12,9 @@ interface ItemDao {
     @Query("SELECT * FROM items")
     fun getAll(): LiveData<List<Item>>
 
+    @Query("SELECT * FROM items")
+    fun getAllSync():List<Item>
+
     @Query("SELECT * FROM items WHERE ID IN (:itemIds)")
     fun getAllByIds(itemIds: IntArray): LiveData<List<Item>>
 

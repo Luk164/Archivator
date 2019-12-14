@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             app:layout_constraintBottom_toTopOf="@+id/et_password"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@+id/button_login"
             app:layout_constraintEnd_toEndOf="@+id/et_email"
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Login"
+            android:text="@string/login"
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,21 +54,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Login"
+            android:text="@string/login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/et_password"
             app:layout_constraintStart_toStartOf="@+id/et_password"
             app:layout_constraintTop_toBottomOf="@+id/et_password" />
-
-        <Button
-            android:id="@+id/bt_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="Test"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

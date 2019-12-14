@@ -1,27 +1,33 @@
 package sk.tuke.archivator.Utils
 
 import android.content.Context
+import android.os.AsyncTask
 import android.util.Log
+import android.widget.Toast
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 import sk.tuke.archivator.Entities.Item
+import sk.tuke.archivator.RoomComponents.AppDatabase
 
 
 class VolleyNetworkManager(val context: Context) {
 
+    private val que = Volley.newRequestQueue(context)
+
     fun sendItem(item: Item)
     {
-        val queue = Volley.newRequestQueue(context)
         val url = "https://parseapi.back4app.com/classes/Item"
 
         val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(Method.POST, url, null,
             Response.Listener {
                 Log.i("Network info:","Response is: $it")
+                uploadSuccess(item)
             },
             Response.ErrorListener {
                 Log.e("error in testCall","$it")
+                uploadFailure()
             }
         )
         {
@@ -41,12 +47,23 @@ class VolleyNetworkManager(val context: Context) {
             }
         }
 
-        queue.add(jsonObjectRequest)
+        que.add(jsonObjectRequest)
+    }
+
+    fun uploadSuccess(item: Item)
+    {
+        AsyncTask.execute {
+            AppDatabase.getDatabase(context).itemDao().delete(item)
+        }
+    }
+
+    fun uploadFailure()
+    {
+        Toast.makeText(context, "Failed to upload item", Toast.LENGTH_SHORT).show()
     }
 
     fun testCall()
     {
-        val queue = Volley.newRequestQueue(context)
         val url = "https://parseapi.back4app.com/classes/Item"
 
         val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(Method.POST, url, null,
@@ -74,6 +91,6 @@ class VolleyNetworkManager(val context: Context) {
             }
         }
 
-        queue.add(jsonObjectRequest)
+        que.add(jsonObjectRequest)
     }
 }

@@ -24,7 +24,7 @@ import sk.tuke.archivator.ViewModels.ItemViewModel
  */
 class ShowDetails : Fragment() {
 
-    val args: ShowDetailsArgs by navArgs()
+    private val args: ShowDetailsArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,13 +36,13 @@ class ShowDetails : Fragment() {
         return inflater.inflate(R.layout.fragment_show_details, container, false)
     }
 
-    //@SuppressLint("SetTextI18n")
     //TODO FIXME
+    @SuppressLint("SetTextI18n")
     override fun onStart() {
         super.onStart()
 
-        val amount = args.ID
-        tv_id.text = "Item id passed is $amount"
+        val value = args.ID
+        tv_id.text = "${getString(R.string.item_id_is)}$value"
 
         val itemViewModel = activity?.run {
             ViewModelProviders.of(this)[ItemViewModel::class.java]
@@ -50,15 +50,15 @@ class ShowDetails : Fragment() {
 
         itemViewModel.itemDao.getOneById(args.ID).observe(this, Observer {
             it.let {
-                tv_name.text = "Name ${it.name}"
-                tv_desc.text = "Description:\n  ${it.desc}"
+                tv_name.text = "${getString(R.string.name)} ${it.name}"
+                tv_desc.text = "${getString(R.string.description)}\n  ${it.desc}"
             }
         })
     }
 
     override fun onResume() {
         super.onResume()
-        (requireActivity() as MainActivity).title = "Login"
+        (requireActivity() as MainActivity).title = getString(R.string.show_details)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -72,13 +72,13 @@ class ShowDetails : Fragment() {
             val builder: AlertDialog.Builder? = activity?.let {
                 AlertDialog.Builder(it)
             }
-            builder?.setMessage("Are you sure you\n want to delete this\n item from database?")?.setPositiveButton("Yes") {_, _ ->
+            builder?.setMessage(getString(R.string.confirm_delete))?.setPositiveButton(getString(R.string.yes)) {_, _ ->
                 AsyncTask.execute {
                     AppDatabase.getDatabase(activity!!).itemDao().delete(this.args.ID)
                 }
                 view!!.findNavController().popBackStack()
             }
-                ?.setNegativeButton("No") { _, _ -> }?.show()
+                ?.setNegativeButton(getString(R.string.no)) { _, _ -> }?.show()
         }
         return super.onOptionsItemSelected(item)
     }

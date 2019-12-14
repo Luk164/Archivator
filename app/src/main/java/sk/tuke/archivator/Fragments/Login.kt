@@ -42,15 +42,12 @@ class Login : Fragment() {
             (activity!!.getSystemService(Context.INPUT_METHOD_SERVICE)
                     as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
         }
-        view.bt_test.setOnClickListener {
-            Global.VNM.testCall()
-        }
 
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        (requireActivity() as MainActivity).title = "Login"
+        (requireActivity() as MainActivity).title = getString(R.string.login)
     }
 }

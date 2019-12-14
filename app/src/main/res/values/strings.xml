@@ -1,6 +1,31 @@
 <resources>
     <string name="app_name">Archivator</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="add_image">Add Image</string>
+    <string name="n_a">N/A</string>
+    <string name="app_logo">App logo</string>
+    <string name="user">User:</string>
+    <string name="username">userName</string>
+    <string name="light">Light</string>
+    <string name="confirm_delete">Are you sure you\\n want to delete this\\n item from database?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="cancel">Cancel</string>
+    <string name="upload">Upload</string>
+    <string name="show_details">Show details</string>
+    <string name="main_screen">Main screen</string>
+    <string name="confirm_upload">Are you sure you want to upload these items?</string>
+    <string name="new_entry">New entry</string>
+    <string name="no_image_selected">No image selected!</string>
+    <string name="item_id_is">Item ID is:</string>
+    <string name="theme">Theme</string>
+    <string name="theme_summary">Select a different theme</string>
+    <string name="compass_setting_title">Simple compass</string>
+    <string name="compass_setting_summary">Use simplified compass? (N, S, E, W)</string>
+    <string name="settings">Settings</string>
 </resources>

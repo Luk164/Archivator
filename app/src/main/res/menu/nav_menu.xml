@@ -6,20 +6,20 @@
             android:id="@+id/login"
             android:checkable="false"
             android:icon="@android:drawable/ic_lock_idle_lock"
-            android:title="Login" />
+            android:title="@string/login" />
         <item
             android:id="@+id/mainScreen"
             android:checkable="false"
             android:icon="@android:drawable/btn_star"
             app:actionViewClass="android.widget.TextView"
-            android:title="Main Screen" />
+            android:title="@string/main_screen" />
     </group>
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/settings"
             android:checkable="false"
             android:icon="@android:drawable/ic_menu_preferences"
-            android:title="Settings" />
+            android:title="@string/settings" />
         <item
             android:id="@+id/bluetoothFragment"
             android:checkable="false"

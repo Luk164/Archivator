@@ -65,7 +65,7 @@ class NewEntry : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (requireActivity() as MainActivity).title = "Login"
+        (requireActivity() as MainActivity).title = getString(R.string.new_entry)
 
         text_date.setOnClickListener {
             val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
@@ -113,7 +113,7 @@ class NewEntry : Fragment() {
                 else ->
                 {
                     Log.e("Image selection failed", "Did you not select any image?")
-                    Toast.makeText(activity!!, "No image selected!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity!!, getString(R.string.no_image_selected), Toast.LENGTH_SHORT).show()
                 }
             }
         }
