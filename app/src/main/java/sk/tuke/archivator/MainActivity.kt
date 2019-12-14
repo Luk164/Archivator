@@ -20,6 +20,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header.view.*
+import sk.tuke.archivator.Utils.VolleyNetworkManager
 import sk.tuke.archivator.ViewModels.AppViewModel
 import sk.tuke.archivator.ViewModels.ItemViewModel
 import java.lang.Exception
@@ -36,7 +37,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var listener : SharedPreferences.OnSharedPreferenceChangeListener
     private lateinit var sharedPrefs : SharedPreferences
 
-    private var currentDegree = 0.0f
     private var lastAccelerometer = FloatArray(3)
     private var lastMagnetometer = FloatArray(3)
     private var lastAccelerometerSet = false
@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         Global.dateFormatter = SimpleDateFormat("yyyy.MM.dd G", Locale.getDefault())
         setContentView(R.layout.activity_main)
+        Global.VNM = VolleyNetworkManager(this)
         itemViewModel = ViewModelProviders.of(this)[ItemViewModel::class.java]
         appViewModel = ViewModelProviders.of(this)[AppViewModel::class.java]
 
@@ -96,7 +97,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 }
             }
         } else {
-            nav_view.getHeaderView(0).sw_flashlight.visibility = View.INVISIBLE
+            nav_view.getHeaderView(0).sw_flashlight.visibility = View.GONE
         }
 
 
@@ -171,7 +172,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                         nav_view.getHeaderView(0).tv_heading.text = "W"
                     }
                 }
-                else //16 wind rose
+                else //16 wind rose or degrees
                 {
                     nav_view.getHeaderView(0).tv_heading.text = degree.roundToInt().toString()
 
