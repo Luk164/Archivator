@@ -2,7 +2,6 @@ package sk.tuke.archivator.Fragments
 
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.*
@@ -48,7 +47,7 @@ class ShowDetails : Fragment() {
             ViewModelProviders.of(this)[ItemViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
 
-        itemViewModel.itemDao.getOneById(args.ID).observe(this, Observer {
+        itemViewModel.itemDao.getOneByIdLive(args.ID).observe(this, Observer {
             it.let {
                 tv_name.text = "${getString(R.string.name)} ${it.name}"
                 tv_desc.text = "${getString(R.string.description)}\n  ${it.desc}"

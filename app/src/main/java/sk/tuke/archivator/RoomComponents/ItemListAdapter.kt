@@ -1,6 +1,7 @@
 package sk.tuke.archivator.RoomComponents
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,13 @@ class ItemListAdapter(context: Context) : RecyclerView.Adapter<ItemListAdapter.I
     internal fun setItems(items: List<Item>) {
         this.items = items
         notifyDataSetChanged()
+    }
+
+    fun removeItem(position: Int) {
+//        this.items.remo
+//        notifyItemRemoved(position)
+//        notifyItemRangeChanged(position, imageModelArrayList.size)
+        Log.e("TEST", "SUCCESS")
     }
 
     override fun getItemCount() = items.size

@@ -10,22 +10,28 @@ import sk.tuke.archivator.Entities.Item
 @Dao
 interface ItemDao {
     @Query("SELECT * FROM items")
-    fun getAll(): LiveData<List<Item>>
+    fun getAllLive(): LiveData<List<Item>>
 
     @Query("SELECT * FROM items")
     fun getAllSync():List<Item>
 
     @Query("SELECT * FROM items WHERE ID IN (:itemIds)")
-    fun getAllByIds(itemIds: IntArray): LiveData<List<Item>>
+    fun getAllByIdsLive(itemIds: IntArray): LiveData<List<Item>>
+
+    @Query("SELECT * FROM items WHERE ID IN (:itemIds)")
+    fun getAllByIds(itemIds: IntArray): List<Item>
 
     @Query("SELECT * FROM items WHERE ID == :itemId")
-    fun getOneById(itemId: Int): LiveData<Item>
+    fun getOneByIdLive(itemId: Int): LiveData<Item>
+
+    @Query("SELECT * FROM items WHERE ID == :itemId")
+    fun getOneById(itemId: Int): Item
 
     @Query("SELECT * FROM items WHERE name LIKE :name LIMIT 1")
-    fun findByName(name: String): LiveData<Item>
+    fun findByNameLive(name: String): LiveData<Item>
 
     @Query("SELECT COUNT(id) FROM items")
-    fun getItemCount(): LiveData<Int>
+    fun getItemCountLive(): LiveData<Int>
 
     @Insert
     fun insertAll(vararg items: Item)
