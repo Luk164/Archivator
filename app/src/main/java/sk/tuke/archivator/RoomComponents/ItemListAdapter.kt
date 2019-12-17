@@ -47,12 +47,5 @@ class ItemListAdapter(context: Context) : RecyclerView.Adapter<ItemListAdapter.I
         notifyDataSetChanged()
     }
 
-    fun removeItem(position: Int) {
-//        this.items.remo
-//        notifyItemRemoved(position)
-//        notifyItemRangeChanged(position, imageModelArrayList.size)
-        Log.e("TEST", "SUCCESS")
-    }
-
     override fun getItemCount() = items.size
 }

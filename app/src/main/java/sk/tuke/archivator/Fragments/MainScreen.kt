@@ -60,8 +60,9 @@ class MainScreen : Fragment() {
                         ViewModelProviders.of(this)[ItemViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
 
-        itemViewModel.itemDao.getAllLive().observe(this, Observer { items ->
-            items?.let { adapter.setItems(it) }
+        itemViewModel.itemDao.getAllLive().observe(this, Observer {
+            it?.let {
+                adapter.setItems(it) }
         })
         initSwipe()
     }
@@ -111,6 +112,7 @@ class MainScreen : Fragment() {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             resources.getDrawable(R.drawable.archive_black_24dp, activity?.theme)
                         } else {
+                            @Suppress("DEPRECATION")
                             resources.getDrawable(R.drawable.archive_black_24dp)
                         }.apply {
                             this.setBounds(
@@ -133,6 +135,7 @@ class MainScreen : Fragment() {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             resources.getDrawable(R.drawable.delete_sweep_black_24dp, activity?.theme)
                         } else {
+                            @Suppress("DEPRECATION")
                             resources.getDrawable(R.drawable.delete_sweep_black_24dp)
                         }.apply {
                             this.setBounds(

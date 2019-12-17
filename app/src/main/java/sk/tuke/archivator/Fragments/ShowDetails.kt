@@ -11,10 +11,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_new_entry.view.*
 import kotlinx.android.synthetic.main.fragment_show_details.*
 import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
 import sk.tuke.archivator.RoomComponents.AppDatabase
+import sk.tuke.archivator.RoomComponents.ImageListAdapter
 import sk.tuke.archivator.ViewModels.ItemViewModel
 
 
@@ -31,8 +34,15 @@ class ShowDetails : Fragment() {
     ): View? {
 
         setHasOptionsMenu(true)
+        val view = inflater.inflate(R.layout.fragment_show_details, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_show_details, container, false)
+//        itemViewModel.tmpItem.observe(this, androidx.lifecycle.Observer {
+//            it?.let {
+//                adapter.setItem(it, itemViewModel)
+//            }
+//        })
+
+        return view
     }
 
     //TODO FIXME
@@ -47,10 +57,15 @@ class ShowDetails : Fragment() {
             ViewModelProviders.of(this)[ItemViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
 
+        val adapter = ImageListAdapter(activity!!)
+        rv_images.adapter = adapter
+        rv_images.layoutManager = LinearLayoutManager(activity!!)
+
         itemViewModel.itemDao.getOneByIdLive(args.ID).observe(this, Observer {
             it.let {
                 tv_name.text = "${getString(R.string.name)} ${it.name}"
                 tv_desc.text = "${getString(R.string.description)}\n  ${it.desc}"
+                adapter.setItem(it)
             }
         })
     }
