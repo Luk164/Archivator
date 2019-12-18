@@ -32,15 +32,8 @@ class ShowDetails : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         setHasOptionsMenu(true)
         val view = inflater.inflate(R.layout.fragment_show_details, container, false)
-        // Inflate the layout for this fragment
-//        itemViewModel.tmpItem.observe(this, androidx.lifecycle.Observer {
-//            it?.let {
-//                adapter.setItem(it, itemViewModel)
-//            }
-//        })
 
         return view
     }
@@ -63,8 +56,8 @@ class ShowDetails : Fragment() {
 
         itemViewModel.itemDao.getOneByIdLive(args.ID).observe(this, Observer {
             it.let {
-                tv_name.text = "${getString(R.string.name)} ${it.name}"
-                tv_desc.text = "${getString(R.string.description)}\n  ${it.desc}"
+                tv_name.text = it.name
+                tv_desc.text = it.desc
                 adapter.setItem(it)
             }
         })
