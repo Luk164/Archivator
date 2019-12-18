@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             else -> setTheme(R.style.lightTheme)
         }
 
-        Global.dateFormatter = SimpleDateFormat("yyyy.MM.dd G", Locale.getDefault())
+        Global.dateFormatter = SimpleDateFormat("dd.MM.yyyy G", Locale.getDefault())
         setContentView(R.layout.activity_main)
         Global.VNM = VolleyNetworkManager(this)
         itemViewModel = ViewModelProviders.of(this)[ItemViewModel::class.java]

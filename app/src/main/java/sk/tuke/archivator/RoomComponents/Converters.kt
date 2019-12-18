@@ -3,7 +3,6 @@ package sk.tuke.archivator.RoomComponents
 import android.net.Uri
 import androidx.room.TypeConverter
 import java.util.*
-import kotlin.collections.ArrayList
 import com.google.gson.reflect.TypeToken
 import sk.tuke.archivator.Global
 
@@ -22,18 +21,27 @@ class Converters {
     }
 
     @TypeConverter
-    fun stringToSomeObjectList(data: String?): List<Uri> {
-        if (data == null) {
-            return Collections.emptyList()
+    fun StringToUriList(string: String): List<Uri>
+    {
+        val uriList = mutableListOf<Uri>()
+        val stringList = Global.gson.fromJson<List<String>>(string, object: TypeToken<List<String>>() {}.type)
+
+        for (str in stringList)
+        {
+            uriList.add(Uri.parse(str))
         }
 
-        val listType = object : TypeToken<List<Uri>>() {}.type //WTF
-
-        return Global.gson.fromJson(data, listType)
-    }
+        return uriList
+}
 
     @TypeConverter
-    fun someObjectListToString(someObjects: List<Uri>): String {
-        return Global.gson.toJson(someObjects)
+    fun UriListToString(uriList: List<Uri>): String
+    {
+        val stringList = mutableListOf<String>()
+        for (uri in uriList)
+        {
+            stringList.add(uri.toString())
+        }
+        return Global.gson.toJson(stringList)
     }
 }
