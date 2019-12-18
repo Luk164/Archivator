@@ -2,7 +2,6 @@ package sk.tuke.archivator.RoomComponents
 
 import android.net.Uri
 import androidx.room.TypeConverter
-import com.google.gson.Gson
 import java.util.*
 import com.google.gson.reflect.TypeToken
 import sk.tuke.archivator.Global
@@ -20,22 +19,6 @@ class Converters {
     fun dateToTimestamp(calendar: Calendar?): Long? {
         return calendar?.timeInMillis
     }
-
-//    @TypeConverter
-//    fun stringToUriList(data: String?): List<Uri> {
-//        if (data == null) {
-//            return Collections.emptyList()
-//        }
-//
-//        val listType = object : TypeToken<List<Uri>>() {}.type //WTF
-//
-//        return Global.gson.fromJson(data, listType)
-//    }
-//
-//    @TypeConverter
-//    fun uriListToString(uriList: List<Uri>): String {
-//        return Global.gson.toJson(uriList)
-//    }
 
     @TypeConverter
     fun StringToUriList(string: String): List<Uri>
@@ -59,6 +42,6 @@ class Converters {
         {
             stringList.add(uri.toString())
         }
-        return Gson().toJson(stringList)
+        return Global.gson.toJson(stringList)
     }
 }
