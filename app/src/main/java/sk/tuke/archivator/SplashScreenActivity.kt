@@ -9,7 +9,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 
-class SplashActivity : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity() {
 
     private lateinit var sharedPrefs : SharedPreferences
     
@@ -34,7 +34,7 @@ class SplashActivity : AppCompatActivity() {
         //4second splash time
         Handler().postDelayed({
             //start main activity
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
             //finish this activity
             finish()
         },3000)
