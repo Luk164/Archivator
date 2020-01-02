@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     lateinit var accelerometer: Sensor
     lateinit var magnetometer: Sensor
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -84,8 +82,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                         cameraManager.setTorchMode(cameraId, true)
                     } catch (exception: Exception) {
                     }
-
-
                 }
                 else
                 {

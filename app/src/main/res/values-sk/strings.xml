@@ -29,4 +29,5 @@
     <string name="compass_setting_summary">Použiť zjednodušený kompas? (N, S, E, W)</string>
     <string name="settings">Nastavenia</string>
     <string name="image_added_by_user">Obrázok pridaný užívateľom</string>
+    <string name="confirm_save">Určite chcete uložiť tento objekt?</string>
 </resources>

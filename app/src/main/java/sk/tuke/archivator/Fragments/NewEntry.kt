@@ -3,9 +3,6 @@ package sk.tuke.archivator.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_new_entry.view.*
 import android.app.DatePickerDialog
 import kotlinx.android.synthetic.main.fragment_new_entry.*
@@ -14,8 +11,10 @@ import android.app.Activity.RESULT_OK
 import android.net.Uri
 import android.os.AsyncTask
 import android.util.Log
+import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -46,6 +45,7 @@ class NewEntry : Fragment() {
     {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_new_entry, container, false)
+        setHasOptionsMenu(true)
 
         itemViewModel = activity?.run {
             ViewModelProviders.of(this)[ItemViewModel::class.java]
@@ -185,5 +185,18 @@ class NewEntry : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.save_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.button_save)
+        {
+            TODO()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
