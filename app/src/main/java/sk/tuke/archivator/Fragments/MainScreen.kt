@@ -168,16 +168,24 @@ class MainScreen : Fragment() {
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == R.id.button_upload)
         {
+            if (AppDatabase.getDatabase(activity!!).itemDao().getAllSync().count() == 0)
+            {
+                Toast.makeText(activity!!, "Nothing to send", Toast.LENGTH_SHORT).show()
+            }
             val builder: AlertDialog.Builder? = activity?.let {
                 AlertDialog.Builder(it)
             }
             builder?.setMessage(getString(R.string.confirm_upload))?.setPositiveButton(getString(R.string.upload)) {_, _ ->
 
                 AsyncTask.execute {
-                    val list = AppDatabase.getDatabase(activity!!).itemDao().getAllSync()
+                    val startingCount = AppDatabase.getDatabase(activity!!).itemDao().getAllSync().count()
+                    val step = 100/startingCount
+                    uploadProgressBar.progress = 0
                     AppDatabase.getDatabase(activity!!).itemDao().getAllSync().forEach {
                         Global.VNM.sendItem(it)
+                        uploadProgressBar.progress += step
                     }
+                    uploadProgressBar.progress = 0 //reset
                 }
             }
                 ?.setNegativeButton(getString(R.string.cancel)) { _, _ -> }?.show()

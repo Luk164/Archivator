@@ -12,7 +12,8 @@ data class Item(
     @ColumnInfo(name = "name") var name: String = "",
     @ColumnInfo(name = "AcquisitionDate") val date: Calendar = Calendar.getInstance(),
     @ColumnInfo(name = "desc") var desc: String = "",
-    @ColumnInfo(name = "images") val images: MutableList<Uri> = ArrayList())
+    @ColumnInfo(name = "images") val images: MutableList<Uri> = ArrayList(),
+    @ColumnInfo(name = "files") val files: MutableList<Uri> = ArrayList())
 {
     /**
      * @param context Optional, if provided a toast will be triggered to inform user why function returned false

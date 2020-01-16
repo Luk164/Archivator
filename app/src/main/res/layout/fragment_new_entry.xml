@@ -12,20 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_add_entry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@android:drawable/ic_menu_save"
-            android:visibility="gone"
-            app:backgroundTint="#3F51B5"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -60,13 +46,6 @@
                 android:hint="DD/MM/YYYY ERA"
                 android:inputType="date" />
 
-            <Button
-                android:id="@+id/button_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@android:drawable/ic_menu_gallery"
-                android:text="@string/add_image" />
-
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -80,41 +59,45 @@
 
         <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/menu_red"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            fab:menu_labels_ellipsize="end"
-            fab:menu_labels_singleLine="true"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_images"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             fab:menu_backgroundColor="#ccffffff"
-            fab:menu_fab_label="Menu label">
+            fab:menu_fab_label="Menu label"
+            fab:menu_labels_ellipsize="end"
+            fab:menu_labels_singleLine="true">
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fab1"
+                android:id="@+id/button_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_delete"
-                fab:fab_size="mini"
-                fab:fab_label="Disabled" />
+                android:src="@android:drawable/ic_menu_gallery"
+                fab:fab_label="Image"
+                fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fab2"
+                android:id="@+id/button_file"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_save"
-                fab:fab_size="mini"
-                fab:fab_label="Remove button" />
+                android:src="@drawable/ic_attach_file_white_24dp"
+                fab:fab_label="File"
+                fab:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/fab3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_input_add"
-                fab:fab_size="mini"
-                fab:fab_label="Restore Button" />
+                fab:fab_label="Restore Button"
+                fab:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>
 
