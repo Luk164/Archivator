@@ -70,8 +70,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            fab:menu_backgroundColor="#ccffffff"
-            fab:menu_fab_label="Menu label"
+            fab:menu_backgroundColor="@android:color/transparent"
+            fab:menu_fab_label="Hide"
             fab:menu_labels_ellipsize="end"
             fab:menu_labels_singleLine="true">
 

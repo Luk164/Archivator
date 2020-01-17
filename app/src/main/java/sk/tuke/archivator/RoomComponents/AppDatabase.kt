@@ -34,6 +34,7 @@ abstract class AppDatabase : RoomDatabase() {
                     "ArchivatorDB"
                 ).apply {
                     this.fallbackToDestructiveMigration() //Fixme before release
+                    //this.enableMultiInstanceInvalidation() //Synchronises multiple instances of room
                 }.build()
                 INSTANCE = instance
                 return instance
