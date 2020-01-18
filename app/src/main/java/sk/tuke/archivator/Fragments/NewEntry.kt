@@ -1,6 +1,7 @@
 package sk.tuke.archivator.Fragments
 
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_new_entry.view.*
@@ -20,6 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import sk.tuke.archivator.Entities.Item
+import sk.tuke.archivator.Entities.newItem
 import sk.tuke.archivator.Global
 import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
@@ -32,11 +34,16 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class NewEntry : Fragment() {
+class NewEntry : Fragment()
+{
 
     private lateinit var itemViewModel: ItemViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View?
     {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_new_entry, container, false)
@@ -57,7 +64,7 @@ class NewEntry : Fragment() {
         val adapter = ImageListAdapter(activity!!)
         view.rv_images.adapter = adapter
         view.rv_images.layoutManager = LinearLayoutManager(activity!!)
-        itemViewModel.tmpItem.observe(this, androidx.lifecycle.Observer {
+        newItem.tmpItem.observe(this, androidx.lifecycle.Observer {
             it?.let {
                 adapter.setItem(it, itemViewModel)
             }
@@ -66,37 +73,47 @@ class NewEntry : Fragment() {
         return view
     }
 
-    override fun onResume() {
+    override fun onResume()
+    {
         super.onResume()
         (requireActivity() as MainActivity).title = getString(R.string.new_entry)
 
-        if (itemViewModel.tmpItem.value!!.name.isNotEmpty()){
-            text_name.setText(itemViewModel.tmpItem.value!!.name)
-        }
-        if (itemViewModel.tmpItem.value!!.desc.isNotEmpty()){
-            text_desc.setText(itemViewModel.tmpItem.value!!.desc)
-        }
-        if (itemViewModel.tmpItem.value!!.date.isSet(Calendar.DATE))
+        if (newItem.tmpItem.value!!.name.isNotEmpty())
         {
-            text_date.setText(Global.dateFormatter.format(itemViewModel.tmpItem.value!!.date.time))
+            text_name.setText(newItem.tmpItem.value!!.name)
+        }
+        if (newItem.tmpItem.value!!.desc.isNotEmpty())
+        {
+            text_desc.setText(newItem.tmpItem.value!!.desc)
+        }
+        if (newItem.tmpItem.value!!.date.isSet(Calendar.DATE))
+        {
+            text_date.setText(Global.dateFormatter.format(newItem.tmpItem.value!!.date.time))
         }
 
         text_name.doOnTextChanged { text, _, _, _ ->
-            itemViewModel.tmpItem.value!!.name = text.toString()
+            newItem.tmpItem.value!!.name = text.toString()
         }
         text_desc.doOnTextChanged { text, _, _, _ ->
-            itemViewModel.tmpItem.value!!.desc = text.toString()
+            newItem.tmpItem.value!!.desc = text.toString()
         }
 
         text_date.setOnClickListener {
-            val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                itemViewModel.tmpItem.value!!.date.set(year, month, dayOfMonth)
-                text_date.setText(Global.dateFormatter.format(itemViewModel.tmpItem.value!!.date.time)) //weird way to do it but it works. There were problems with android.icu implementation
-            }, 2019, 1, 1).run {this.show()}
+            val dpd = DatePickerDialog(
+                activity!!,
+                DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                    newItem.tmpItem.value!!.date.set(year, month, dayOfMonth)
+                    text_date.setText(Global.dateFormatter.format(newItem.tmpItem.value!!.date.time)) //weird way to do it but it works. There were problems with android.icu implementation
+                },
+                2019,
+                1,
+                1
+            ).run { this.show() }
         }
     }
 
-    private fun pickFromGallery() {
+    private fun pickFromGallery()
+    {
         Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             this.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             this.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
@@ -106,96 +123,112 @@ class NewEntry : Fragment() {
         }
     }
 
-    private fun pickFile() {
+    private fun pickFile()
+    {
         Intent(Intent.ACTION_GET_CONTENT).apply {
             this.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             this.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
             this.addCategory(Intent.CATEGORY_OPENABLE)
-            this.type="*/*"
+            this.type = "*/*"
             startActivityForResult(this, Global.FILE_REQUEST_CODE)
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
 
         super.onActivityResult(requestCode, resultCode, data)
 
         // When an Image is picked
-        if (requestCode == Global.GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            when {
+        if (requestCode == Global.GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null)
+        {
+            when
+            {
                 //multiple images
-                data.clipData != null -> {
+                data.clipData != null ->
+                {
                     val uriList: MutableList<Uri> = mutableListOf()
                     for (i in 0 until data.clipData!!.itemCount)
                     {
                         uriList.add(data.clipData!!.getItemAt(i).uri)
                     }
-                    itemViewModel.tmpItem.value!!.images.addAll(uriList)
-                    itemViewModel.tmpItem.postValue(itemViewModel.tmpItem.value)
+                    newItem.tmpItem.value!!.images.addAll(uriList)
+                    newItem.tmpItem.postValue(newItem.tmpItem.value)
                 }
                 //Single image
-                data.data != null -> {
-                    itemViewModel.tmpItem.value!!.images.add(data.data!!)
-                    itemViewModel.tmpItem.postValue(itemViewModel.tmpItem.value)
+                data.data != null ->
+                {
+                    newItem.tmpItem.value!!.images.add(data.data!!)
+                    newItem.tmpItem.postValue(newItem.tmpItem.value)
                 }
                 else ->
                 {
                     Log.e("Image selection failed", "Did you not select any image?")
-                    Toast.makeText(activity!!, getString(R.string.no_image_selected), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        activity!!,
+                        getString(R.string.no_image_selected),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
-        }
-        else if (requestCode == Global.FILE_REQUEST_CODE && resultCode == RESULT_OK && data != null)
+        } else if (requestCode == Global.FILE_REQUEST_CODE && resultCode == RESULT_OK && data != null)
         {
-            when {
+            when
+            {
                 //multiple images
-                data.clipData != null -> {
+                data.clipData != null ->
+                {
                     val uriList: MutableList<Uri> = mutableListOf()
                     for (i in 0 until data.clipData!!.itemCount)
                     {
                         uriList.add(data.clipData!!.getItemAt(i).uri)
                     }
-                    itemViewModel.tmpItem.value!!.files.addAll(uriList)
-                    itemViewModel.tmpItem.postValue(itemViewModel.tmpItem.value)
+                    newItem.tmpItem.value!!.files.addAll(uriList)
+                    newItem.tmpItem.postValue(newItem.tmpItem.value)
                 }
                 //Single image
-                data.data != null -> {
-                    itemViewModel.tmpItem.value!!.files.add(data.data!!)
-                    itemViewModel.tmpItem.postValue(itemViewModel.tmpItem.value)
+                data.data != null ->
+                {
+                    newItem.tmpItem.value!!.files.add(data.data!!)
+                    newItem.tmpItem.postValue(newItem.tmpItem.value)
                 }
                 else ->
                 {
                     Log.e("File selection failed", "Did you not select any files?")
-                    Toast.makeText(activity!!, getString(R.string.no_image_selected), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        activity!!,
+                        getString(R.string.no_image_selected),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater)
+    {
         inflater.inflate(R.menu.save_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
         if (item.itemId == R.id.button_save)
         {
-            if(itemViewModel.tmpItem.value!!.checkValid(activity!!))
+            if (newItem.tmpItem.value!!.verify(activity!!)) //ready to save
             {
-                val savedItem = itemViewModel.tmpItem.value
-                if (savedItem != null) {
-                    itemViewModel.tmpItem.value = Item()
-                    CoroutineScope(Dispatchers.Default).launch {
-                        AppDatabase.getDatabase(activity!!).itemDao().insertAll(savedItem)
-                    }
+                CoroutineScope(Dispatchers.Default).launch {
+                    val newItemId = AppDatabase.getDatabase(activity!!).itemDao()
+                        .insert(newItem.tmpItem.value!!)
+                    AppDatabase.getDatabase(activity!!).eventDao()
+                        .insertEventsForItem(newItemId, newItem.tmpEvents.value!!)
+                    newItem.clear()
                 }
-                else
-                {
-                    Toast.makeText(activity!!, "Item saving failed", Toast.LENGTH_SHORT).show()
-                }
-
-                view?.findNavController()?.popBackStack() //end fragment after adding to database
+            } else
+            {
+                Toast.makeText(activity!!, "Item saving failed", Toast.LENGTH_SHORT).show()
             }
+            view?.findNavController()?.popBackStack() //end fragment after adding to database
         }
         return super.onOptionsItemSelected(item)
     }

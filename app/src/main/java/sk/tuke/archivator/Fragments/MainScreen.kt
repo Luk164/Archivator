@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_main_screen.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import sk.tuke.archivator.Entities.Item
 import sk.tuke.archivator.Global
 import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
@@ -82,7 +83,7 @@ class MainScreen : Fragment() {
                     //Logic to do when swipe left
                     Toast.makeText(activity!!, "Swipe left (DELETE) on ID: ${(viewHolder as ItemListAdapter.ItemViewHolder).itemId.text}", Toast.LENGTH_SHORT).show()
                     CoroutineScope(Dispatchers.Default).launch {
-                        AppDatabase.getDatabase(activity!!).itemDao().delete(viewHolder.itemId.text.toString().toInt())
+                        AppDatabase.getDatabase(activity!!).itemDao().delete(viewHolder.itemId.text.toString().toLong())
                     }
 
                 } else {
@@ -90,7 +91,7 @@ class MainScreen : Fragment() {
                     //Logic to do when swipe right
                     Toast.makeText(activity!!, "Swipe right (UPLOAD) on ID: ${(viewHolder as ItemListAdapter.ItemViewHolder).itemId.text}", Toast.LENGTH_SHORT).show()
                     CoroutineScope(Dispatchers.Default).launch {
-                        Global.VNM.sendItem(AppDatabase.getDatabase(activity!!).itemDao().getOneById(viewHolder.itemId.text.toString().toInt()))
+                        Global.VNM.sendItem(AppDatabase.getDatabase(activity!!).itemDao().getOneById(viewHolder.itemId.text.toString().toLong()))
                     }
                 }
             }

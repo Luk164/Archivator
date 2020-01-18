@@ -8,12 +8,14 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import sk.tuke.archivator.Entities.Event
 import sk.tuke.archivator.Entities.Item
 
-@Database(entities = [Item::class], version = 3, exportSchema = false)
+@Database(entities = [Item::class, Event::class], version = 4, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun itemDao(): ItemDao
+    abstract fun eventDao(): EventDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the

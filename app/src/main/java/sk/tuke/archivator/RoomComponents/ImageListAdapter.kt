@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import sk.tuke.archivator.Entities.Item
+import sk.tuke.archivator.Entities.newItem
 import sk.tuke.archivator.R
 import sk.tuke.archivator.ViewModels.ItemViewModel
 
@@ -35,7 +36,7 @@ class ImageListAdapter(context: Context): RecyclerView.Adapter<ImageListAdapter.
         {
             holder.itemView.setOnClickListener {
                 item.images.remove(current)
-                model!!.tmpItem.postValue(model!!.tmpItem.value)
+                newItem.tmpItem.postValue(newItem.tmpItem.value)
             }
         }
     }

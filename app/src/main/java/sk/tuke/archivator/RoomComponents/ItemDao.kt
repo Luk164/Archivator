@@ -1,11 +1,9 @@
 package sk.tuke.archivator.RoomComponents
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import sk.tuke.archivator.Entities.Item
+import sk.tuke.archivator.Entities.ItemWithStuff
 
 @Dao
 interface ItemDao {
@@ -22,26 +20,31 @@ interface ItemDao {
     fun getAllByIds(itemIds: IntArray): List<Item>
 
     @Query("SELECT * FROM items WHERE ID == :itemId")
-    fun getOneByIdLive(itemId: Int): LiveData<Item>
+    fun getOneByIdLive(itemId: Long): LiveData<Item>
 
     @Query("SELECT * FROM items WHERE ID == :itemId")
-    fun getOneById(itemId: Int): Item
+    fun getOneById(itemId: Long): Item
 
     @Query("SELECT * FROM items WHERE name LIKE :name LIMIT 1")
     fun findByNameLive(name: String): LiveData<Item>
 
     @Query("SELECT COUNT(id) FROM items")
-    fun getItemCountLive(): LiveData<Int>
+    fun getItemCountLive(): LiveData<Long>
 
     @Insert
-    fun insertAll(vararg items: Item)
+    fun insertAll(items: List<Item>): List<Long>
 
     @Insert
-    fun insert(item: Item)
+    fun insert(item: Item): Long
 
     @Delete
     fun delete(item: Item)
 
     @Query("DELETE FROM items WHERE id = (:itemId)")
-    fun delete(itemId: Int)
+    fun delete(itemId: Long)
+
+    //Item with stuff
+    @Transaction
+    @Query("SELECT * FROM items")
+    fun getItemsWithStuff(): List<ItemWithStuff>
 }

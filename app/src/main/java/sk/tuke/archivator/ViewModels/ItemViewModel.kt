@@ -10,10 +10,4 @@ import sk.tuke.archivator.RoomComponents.ItemDao
 
 class ItemViewModel(application: Application) : AndroidViewModel(application) {
     val itemDao: ItemDao = AppDatabase.getDatabase(application).itemDao()
-
-    val tmpItem: MutableLiveData<Item> by lazy {
-        MutableLiveData<Item>().apply {
-            this.value = Item()
-        }
-    }
 }
