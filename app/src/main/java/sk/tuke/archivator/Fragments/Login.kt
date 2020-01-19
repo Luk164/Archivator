@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
-import sk.tuke.archivator.Global
 import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
 import sk.tuke.archivator.ViewModels.AppViewModel

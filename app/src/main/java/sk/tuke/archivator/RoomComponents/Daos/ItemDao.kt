@@ -1,4 +1,4 @@
-package sk.tuke.archivator.RoomComponents
+package sk.tuke.archivator.RoomComponents.Daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

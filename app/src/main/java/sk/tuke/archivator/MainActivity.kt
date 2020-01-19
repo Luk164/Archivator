@@ -12,6 +12,7 @@ import android.hardware.camera2.CameraManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -20,6 +21,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header.view.*
+import sk.tuke.archivator.Objects.Global
 import sk.tuke.archivator.Utils.VolleyNetworkManager
 import sk.tuke.archivator.ViewModels.AppViewModel
 import sk.tuke.archivator.ViewModels.ItemViewModel
@@ -75,7 +77,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             val cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
             val cameraId = cameraManager.cameraIdList[0]
 
-            nav_view.getHeaderView(0).sw_flashlight.setOnCheckedChangeListener { buttonView, isChecked ->
+            nav_view.getHeaderView(0).sw_flashlight.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked)
                 {
                     try {
@@ -89,6 +91,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                         cameraManager.setTorchMode(cameraId, false)
 
                     } catch (e: Exception) {
+                        Toast.makeText(this, "ERROR: Torch failed!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

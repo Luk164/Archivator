@@ -1,4 +1,4 @@
-package sk.tuke.archivator.RoomComponents
+package sk.tuke.archivator.RoomComponents.Daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -34,10 +34,10 @@ abstract class EventDao {
     }
 
     @Insert
-    abstract fun _insertAll(events: List<Event>): List<Long>
+    protected abstract fun _insertAll(events: List<Event>): List<Long>
 
     @Insert
-    abstract fun _insert(event: Event): Long
+    protected abstract fun _insert(event: Event): Long
 
     @Delete
     abstract fun delete(event: Event)

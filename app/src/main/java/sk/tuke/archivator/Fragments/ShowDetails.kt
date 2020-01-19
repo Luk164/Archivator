@@ -12,12 +12,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_new_entry.view.*
 import kotlinx.android.synthetic.main.fragment_show_details.*
 import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
 import sk.tuke.archivator.RoomComponents.AppDatabase
-import sk.tuke.archivator.RoomComponents.ImageListAdapter
+import sk.tuke.archivator.RoomComponents.PictureListAdapter
 import sk.tuke.archivator.ViewModels.ItemViewModel
 
 
@@ -50,7 +49,7 @@ class ShowDetails : Fragment() {
             ViewModelProviders.of(this)[ItemViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
 
-        val adapter = ImageListAdapter(activity!!)
+        val adapter = PictureListAdapter(activity!!)
         rv_images.adapter = adapter
         rv_images.layoutManager = LinearLayoutManager(activity!!)
 

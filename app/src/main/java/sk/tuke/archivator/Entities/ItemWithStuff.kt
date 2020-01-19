@@ -2,6 +2,7 @@ package sk.tuke.archivator.Entities
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import java.io.File
 
 data class ItemWithStuff(
     @Embedded
@@ -10,5 +11,17 @@ data class ItemWithStuff(
         parentColumn = "id",
         entityColumn = "parentItemId"
     )
-    val events: List<Event>
+    val events: List<Event>,
+
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "parentItemId"
+    )
+    val images: List<Image>,
+
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "parentItemId"
+    )
+    val files: List<FileEntity>
 )

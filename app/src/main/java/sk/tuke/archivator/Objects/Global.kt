@@ -1,4 +1,4 @@
-package sk.tuke.archivator
+package sk.tuke.archivator.Objects
 
 import com.google.gson.Gson
 import sk.tuke.archivator.Utils.VolleyNetworkManager

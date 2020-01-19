@@ -4,7 +4,7 @@ import android.net.Uri
 import androidx.room.TypeConverter
 import java.util.*
 import com.google.gson.reflect.TypeToken
-import sk.tuke.archivator.Global
+import sk.tuke.archivator.Objects.Global
 
 
 class Converters {
@@ -18,6 +18,18 @@ class Converters {
     @TypeConverter
     fun dateToTimestamp(calendar: Calendar?): Long? {
         return calendar?.timeInMillis
+    }
+
+    @TypeConverter
+    fun StringToUri(string: String): Uri
+    {
+        return Uri.parse(string)
+    }
+
+    @TypeConverter
+    fun UriToString(uri: Uri): String
+    {
+        return uri.toString()
     }
 
     @TypeConverter

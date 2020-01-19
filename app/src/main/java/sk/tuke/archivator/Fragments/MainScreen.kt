@@ -21,8 +21,7 @@ import kotlinx.android.synthetic.main.fragment_main_screen.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import sk.tuke.archivator.Entities.Item
-import sk.tuke.archivator.Global
+import sk.tuke.archivator.Objects.Global
 import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
 import sk.tuke.archivator.RoomComponents.AppDatabase
@@ -103,7 +102,6 @@ class MainScreen : Fragment() {
                     val itemView = viewHolder.itemView
                     val height = itemView.bottom.toFloat() - itemView.top.toFloat()
                     val width = height / 3
-                    Log.i("dX", dX.toString())
                     if (dX > 0) {
                         //Drawing for Swipe Right
                         p.color = Color.parseColor("#2F2FD3")

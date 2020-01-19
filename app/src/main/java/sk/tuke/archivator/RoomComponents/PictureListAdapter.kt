@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import sk.tuke.archivator.Entities.Item
-import sk.tuke.archivator.Entities.newItem
+import sk.tuke.archivator.Objects.NewItem
 import sk.tuke.archivator.R
 import sk.tuke.archivator.ViewModels.ItemViewModel
 
-class ImageListAdapter(context: Context): RecyclerView.Adapter<ImageListAdapter.ImageViewHolder>() {
+class PictureListAdapter(context: Context): RecyclerView.Adapter<PictureListAdapter.ImageViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var images = emptyList<Uri>() // Cached copy of items
@@ -36,7 +36,8 @@ class ImageListAdapter(context: Context): RecyclerView.Adapter<ImageListAdapter.
         {
             holder.itemView.setOnClickListener {
                 item.images.remove(current)
-                newItem.tmpItem.postValue(newItem.tmpItem.value)
+                NewItem.tmpItem.postValue(
+                    NewItem.tmpItem.value)
             }
         }
     }

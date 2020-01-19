@@ -1,7 +1,6 @@
 package sk.tuke.archivator.Fragments
 
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_new_entry.view.*
@@ -20,13 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import sk.tuke.archivator.Entities.Item
-import sk.tuke.archivator.Entities.newItem
-import sk.tuke.archivator.Global
+import sk.tuke.archivator.Objects.NewItem
+import sk.tuke.archivator.Objects.Global
 import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
 import sk.tuke.archivator.RoomComponents.AppDatabase
-import sk.tuke.archivator.RoomComponents.ImageListAdapter
+import sk.tuke.archivator.RoomComponents.PictureListAdapter
 import sk.tuke.archivator.ViewModels.ItemViewModel
 import java.util.*
 
@@ -61,10 +59,10 @@ class NewEntry : Fragment()
             pickFile()
         }
 
-        val adapter = ImageListAdapter(activity!!)
+        val adapter = PictureListAdapter(activity!!)
         view.rv_images.adapter = adapter
         view.rv_images.layoutManager = LinearLayoutManager(activity!!)
-        newItem.tmpItem.observe(this, androidx.lifecycle.Observer {
+        NewItem.tmpItem.observe(this, androidx.lifecycle.Observer {
             it?.let {
                 adapter.setItem(it, itemViewModel)
             }
@@ -78,32 +76,32 @@ class NewEntry : Fragment()
         super.onResume()
         (requireActivity() as MainActivity).title = getString(R.string.new_entry)
 
-        if (newItem.tmpItem.value!!.name.isNotEmpty())
+        if (NewItem.tmpItem.value!!.name.isNotEmpty())
         {
-            text_name.setText(newItem.tmpItem.value!!.name)
+            text_name.setText(NewItem.tmpItem.value!!.name)
         }
-        if (newItem.tmpItem.value!!.desc.isNotEmpty())
+        if (NewItem.tmpItem.value!!.desc.isNotEmpty())
         {
-            text_desc.setText(newItem.tmpItem.value!!.desc)
+            text_desc.setText(NewItem.tmpItem.value!!.desc)
         }
-        if (newItem.tmpItem.value!!.date.isSet(Calendar.DATE))
+        if (NewItem.tmpItem.value!!.date.isSet(Calendar.DATE))
         {
-            text_date.setText(Global.dateFormatter.format(newItem.tmpItem.value!!.date.time))
+            text_date.setText(Global.dateFormatter.format(NewItem.tmpItem.value!!.date.time))
         }
 
         text_name.doOnTextChanged { text, _, _, _ ->
-            newItem.tmpItem.value!!.name = text.toString()
+            NewItem.tmpItem.value!!.name = text.toString()
         }
         text_desc.doOnTextChanged { text, _, _, _ ->
-            newItem.tmpItem.value!!.desc = text.toString()
+            NewItem.tmpItem.value!!.desc = text.toString()
         }
 
         text_date.setOnClickListener {
-            val dpd = DatePickerDialog(
+            DatePickerDialog(
                 activity!!,
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                    newItem.tmpItem.value!!.date.set(year, month, dayOfMonth)
-                    text_date.setText(Global.dateFormatter.format(newItem.tmpItem.value!!.date.time)) //weird way to do it but it works. There were problems with android.icu implementation
+                    NewItem.tmpItem.value!!.date.set(year, month, dayOfMonth)
+                    text_date.setText(Global.dateFormatter.format(NewItem.tmpItem.value!!.date.time)) //weird way to do it but it works. There were problems with android.icu implementation
                 },
                 2019,
                 1,
@@ -136,7 +134,6 @@ class NewEntry : Fragment()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
     {
-
         super.onActivityResult(requestCode, resultCode, data)
 
         // When an Image is picked
@@ -152,14 +149,16 @@ class NewEntry : Fragment()
                     {
                         uriList.add(data.clipData!!.getItemAt(i).uri)
                     }
-                    newItem.tmpItem.value!!.images.addAll(uriList)
-                    newItem.tmpItem.postValue(newItem.tmpItem.value)
+                    NewItem.tmpItem.value!!.images.addAll(uriList)
+                    NewItem.tmpItem.postValue(
+                        NewItem.tmpItem.value)
                 }
                 //Single image
                 data.data != null ->
                 {
-                    newItem.tmpItem.value!!.images.add(data.data!!)
-                    newItem.tmpItem.postValue(newItem.tmpItem.value)
+                    NewItem.tmpItem.value!!.images.add(data.data!!)
+                    NewItem.tmpItem.postValue(
+                        NewItem.tmpItem.value)
                 }
                 else ->
                 {
@@ -171,11 +170,11 @@ class NewEntry : Fragment()
                     ).show()
                 }
             }
-        } else if (requestCode == Global.FILE_REQUEST_CODE && resultCode == RESULT_OK && data != null)
+        } else if (requestCode == Global.FILE_REQUEST_CODE && resultCode == RESULT_OK && data != null) //when a file is picked
         {
             when
             {
-                //multiple images
+                //multiple files
                 data.clipData != null ->
                 {
                     val uriList: MutableList<Uri> = mutableListOf()
@@ -183,14 +182,16 @@ class NewEntry : Fragment()
                     {
                         uriList.add(data.clipData!!.getItemAt(i).uri)
                     }
-                    newItem.tmpItem.value!!.files.addAll(uriList)
-                    newItem.tmpItem.postValue(newItem.tmpItem.value)
+                    NewItem.tmpItem.value!!.files.addAll(uriList)
+                    NewItem.tmpItem.postValue(
+                        NewItem.tmpItem.value)
                 }
-                //Single image
+                //Single file
                 data.data != null ->
                 {
-                    newItem.tmpItem.value!!.files.add(data.data!!)
-                    newItem.tmpItem.postValue(newItem.tmpItem.value)
+                    NewItem.tmpItem.value!!.files.add(data.data!!)
+                    NewItem.tmpItem.postValue(
+                        NewItem.tmpItem.value)
                 }
                 else ->
                 {
@@ -215,14 +216,24 @@ class NewEntry : Fragment()
     {
         if (item.itemId == R.id.button_save)
         {
-            if (newItem.tmpItem.value!!.verify(activity!!)) //ready to save
+            if (NewItem.tmpItem.value!!.verify(activity!!)) //ready to save
             {
                 CoroutineScope(Dispatchers.Default).launch {
                     val newItemId = AppDatabase.getDatabase(activity!!).itemDao()
-                        .insert(newItem.tmpItem.value!!)
+                        .insert(NewItem.tmpItem.value!!)
+
                     AppDatabase.getDatabase(activity!!).eventDao()
-                        .insertEventsForItem(newItemId, newItem.tmpEvents.value!!)
-                    newItem.clear()
+                        .insertEventsForItem(newItemId, NewItem.tmpEvents.value!!)
+
+                    AppDatabase.getDatabase(activity!!).imageDao()
+                        .insertImagesForItem(newItemId, NewItem.tmpImages.value!!)
+
+                    AppDatabase.getDatabase(activity!!).fileDao()
+                        .insertFilesForItem(newItemId, NewItem.tmpFiles.value!!)
+                }.invokeOnCompletion {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        NewItem.clear()
+                    }
                 }
             } else
             {
