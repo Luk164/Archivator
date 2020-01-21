@@ -14,11 +14,11 @@ object NewItem {
         }
     }
 
-    val tmpEvents: MutableLiveData<List<Event>> = MutableLiveData<List<Event>>().apply { this.value = mutableListOf() }
+    val tmpEvents: MutableLiveData<MutableList<Event>> = MutableLiveData<MutableList<Event>>().apply { this.value = mutableListOf() }
 
-    val tmpImages: MutableLiveData<List<Image>> = MutableLiveData<List<Image>>().apply { this.value = mutableListOf() }
+    val tmpImages: MutableLiveData<MutableList<Image>> = MutableLiveData<MutableList<Image>>().apply { this.value = mutableListOf() }
 
-    val tmpFiles: MutableLiveData<List<FileEntity>> = MutableLiveData<List<FileEntity>>().apply { this.value = mutableListOf() }
+    val tmpFiles: MutableLiveData<MutableList<FileEntity>> = MutableLiveData<MutableList<FileEntity>>().apply { this.value = mutableListOf() }
 
     /**
      * Clears temporary item and its contents

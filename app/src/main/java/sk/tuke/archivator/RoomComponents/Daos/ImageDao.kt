@@ -39,7 +39,7 @@ abstract class ImageDao
     {
         if (_checkItemExists(itemId) != 1)
         {
-            throw Exception("Parent image ID not found in database!")
+            throw Exception("Parent item_content ID not found in database!")
         }
 
         for (image in images)
@@ -53,7 +53,7 @@ abstract class ImageDao
     {
         if (_checkItemExists(itemId) != 1)
         {
-            throw Exception("Parent image ID not found in database!")
+            throw Exception("Parent item_content ID not found in database!")
         }
 
         image.parentItemId = itemId

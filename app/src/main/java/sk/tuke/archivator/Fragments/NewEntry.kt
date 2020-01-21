@@ -8,9 +8,10 @@ import android.app.DatePickerDialog
 import kotlinx.android.synthetic.main.fragment_new_entry.*
 import android.content.Intent
 import android.app.Activity.RESULT_OK
-import android.net.Uri
+import android.app.AlertDialog
 import android.util.Log
 import android.view.*
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProviders
@@ -19,6 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import sk.tuke.archivator.Entities.Event
+import sk.tuke.archivator.Entities.FileEntity
+import sk.tuke.archivator.Entities.Image
 import sk.tuke.archivator.Objects.NewItem
 import sk.tuke.archivator.Objects.Global
 import sk.tuke.archivator.MainActivity
@@ -26,7 +30,6 @@ import sk.tuke.archivator.R
 import sk.tuke.archivator.RoomComponents.AppDatabase
 import sk.tuke.archivator.RoomComponents.PictureListAdapter
 import sk.tuke.archivator.ViewModels.ItemViewModel
-import java.util.*
 
 
 /**
@@ -52,7 +55,7 @@ class NewEntry : Fragment()
         } ?: throw Exception("Invalid Activity")
 
         view.button_image.setOnClickListener {
-            pickFromGallery()
+            pickImage()
         }
 
         view.button_file.setOnClickListener {
@@ -62,9 +65,9 @@ class NewEntry : Fragment()
         val adapter = PictureListAdapter(activity!!)
         view.rv_images.adapter = adapter
         view.rv_images.layoutManager = LinearLayoutManager(activity!!)
-        NewItem.tmpItem.observe(this, androidx.lifecycle.Observer {
+        NewItem.tmpImages.observe(this, androidx.lifecycle.Observer {
             it?.let {
-                adapter.setItem(it, itemViewModel)
+                adapter.setItem(it)
             }
         })
 
@@ -84,10 +87,6 @@ class NewEntry : Fragment()
         {
             text_desc.setText(NewItem.tmpItem.value!!.desc)
         }
-        if (NewItem.tmpItem.value!!.date.isSet(Calendar.DATE))
-        {
-            text_date.setText(Global.dateFormatter.format(NewItem.tmpItem.value!!.date.time))
-        }
 
         text_name.doOnTextChanged { text, _, _, _ ->
             NewItem.tmpItem.value!!.name = text.toString()
@@ -96,12 +95,25 @@ class NewEntry : Fragment()
             NewItem.tmpItem.value!!.desc = text.toString()
         }
 
-        text_date.setOnClickListener {
-            DatePickerDialog(
-                activity!!,
+        button_event.setOnClickListener {
+            val newEvent = Event()
+            //get and set date
+            DatePickerDialog(activity!!,
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                    NewItem.tmpItem.value!!.date.set(year, month, dayOfMonth)
-                    text_date.setText(Global.dateFormatter.format(NewItem.tmpItem.value!!.date.time)) //weird way to do it but it works. There were problems with android.icu implementation
+                    newEvent.date.set(year, month, dayOfMonth)
+
+                    //get and set name
+                    val etName = EditText(activity!!)
+                    AlertDialog.Builder(activity!!).apply {
+                        this.setTitle("Event name")
+                        this.setMessage("Set name for this new event")
+                        this.setView(etName)
+                        this.setPositiveButton("Add") { _, _ ->
+                            newEvent.name = etName.text.toString()
+                            NewItem.tmpEvents.value?.add(newEvent) //add to new Item representative object as a LAST step
+                        }
+                        this.setNegativeButton("Cancel", null)
+                    }.create().show()
                 },
                 2019,
                 1,
@@ -110,7 +122,7 @@ class NewEntry : Fragment()
         }
     }
 
-    private fun pickFromGallery()
+    private fun pickImage()
     {
         Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             this.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
@@ -144,25 +156,23 @@ class NewEntry : Fragment()
                 //multiple images
                 data.clipData != null ->
                 {
-                    val uriList: MutableList<Uri> = mutableListOf()
+                    val imageList: MutableList<Image> = mutableListOf()
                     for (i in 0 until data.clipData!!.itemCount)
                     {
-                        uriList.add(data.clipData!!.getItemAt(i).uri)
+                        imageList.add(Image(uri = data.clipData!!.getItemAt(i).uri, description = data.clipData!!.getItemAt(i).uri.pathSegments.last()))
                     }
-                    NewItem.tmpItem.value!!.images.addAll(uriList)
-                    NewItem.tmpItem.postValue(
-                        NewItem.tmpItem.value)
+                    NewItem.tmpImages.value?.addAll(imageList)
+                    NewItem.tmpImages.postValue(NewItem.tmpImages.value) //update
                 }
-                //Single image
+                //Single item_content
                 data.data != null ->
                 {
-                    NewItem.tmpItem.value!!.images.add(data.data!!)
-                    NewItem.tmpItem.postValue(
-                        NewItem.tmpItem.value)
+                    NewItem.tmpImages.value?.add(Image(uri = data.data!!, description = data.data!!.pathSegments.last()))
+                    NewItem.tmpImages.postValue(NewItem.tmpImages.value) //update
                 }
                 else ->
                 {
-                    Log.e("Image selection failed", "Did you not select any image?")
+                    Log.e("Image selection failed", "Did you not select any item_content?")
                     Toast.makeText(
                         activity!!,
                         getString(R.string.no_image_selected),
@@ -177,21 +187,19 @@ class NewEntry : Fragment()
                 //multiple files
                 data.clipData != null ->
                 {
-                    val uriList: MutableList<Uri> = mutableListOf()
+                    val fileList: MutableList<FileEntity> = mutableListOf()
                     for (i in 0 until data.clipData!!.itemCount)
                     {
-                        uriList.add(data.clipData!!.getItemAt(i).uri)
+                        fileList.add(FileEntity(uri = data.clipData!!.getItemAt(i).uri))
                     }
-                    NewItem.tmpItem.value!!.files.addAll(uriList)
-                    NewItem.tmpItem.postValue(
-                        NewItem.tmpItem.value)
+                    NewItem.tmpFiles.value!!.addAll(fileList)
+                    NewItem.tmpFiles.postValue(NewItem.tmpFiles.value) //update
                 }
                 //Single file
                 data.data != null ->
                 {
-                    NewItem.tmpItem.value!!.files.add(data.data!!)
-                    NewItem.tmpItem.postValue(
-                        NewItem.tmpItem.value)
+                    NewItem.tmpFiles.value!!.add(FileEntity(uri = data.data!!))
+                    NewItem.tmpFiles.postValue(NewItem.tmpFiles.value) //update
                 }
                 else ->
                 {

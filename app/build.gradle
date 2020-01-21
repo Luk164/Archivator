@@ -20,6 +20,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+//    defaultConfig {
+//        vectorDrawables.useSupportLibrary = true
+//    }
+
     compileOptions {
         sourceCompatibility "1.8"
         targetCompatibility "1.8"

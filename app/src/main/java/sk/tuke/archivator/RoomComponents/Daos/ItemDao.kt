@@ -47,4 +47,17 @@ interface ItemDao {
     @Transaction
     @Query("SELECT * FROM items")
     fun getItemsWithStuff(): List<ItemWithStuff>
+
+    //Item with stuff
+    @Transaction
+    @Query("SELECT * FROM items")
+    fun getItemsWithStuffLive(): LiveData<List<ItemWithStuff>>
+
+    @Transaction
+    @Query("SELECT * FROM items WHERE id = (:itemId)")
+    fun getItemWithStuff(itemId: Long): ItemWithStuff
+
+    @Transaction
+    @Query("SELECT * FROM items WHERE id = (:itemId)")
+    fun getItemWithStuffLive(itemId: Long): LiveData<ItemWithStuff>
 }

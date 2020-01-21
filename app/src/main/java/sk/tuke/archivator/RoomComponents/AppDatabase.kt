@@ -14,7 +14,7 @@ import sk.tuke.archivator.RoomComponents.Daos.FileDao
 import sk.tuke.archivator.RoomComponents.Daos.ImageDao
 import sk.tuke.archivator.RoomComponents.Daos.ItemDao
 
-@Database(entities = [Item::class, Event::class, Image::class, FileEntity::class], version = 5, exportSchema = false)
+@Database(entities = [Item::class, Event::class, Image::class, FileEntity::class], version = 7, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun itemDao(): ItemDao

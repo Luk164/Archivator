@@ -9,10 +9,10 @@ import java.lang.Exception
 
 @Entity(tableName = "files")
 data class FileEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     var uri: Uri,
-    var description: String,
-    var parentItemId: Long
+    var description: String = "",
+    var parentItemId: Long = 0L
 ){
     public fun verify(context: Context): Boolean
     {

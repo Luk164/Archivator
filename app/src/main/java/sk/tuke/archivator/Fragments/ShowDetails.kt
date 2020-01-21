@@ -53,11 +53,11 @@ class ShowDetails : Fragment() {
         rv_images.adapter = adapter
         rv_images.layoutManager = LinearLayoutManager(activity!!)
 
-        itemViewModel.itemDao.getOneByIdLive(args.ID).observe(this, Observer {
+        itemViewModel.itemDao.getItemWithStuffLive(args.ID).observe(this, Observer {
             it.let {
-                tv_name.text = it.name
-                tv_desc.text = it.desc
-                adapter.setItem(it)
+                tv_name.text = it.item.name
+                tv_desc.text = it.item.desc
+                adapter.setItem(it.images)
             }
         })
     }
