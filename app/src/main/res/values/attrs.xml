@@ -5,5 +5,6 @@
     <attr name="buttonHighlightColor" format="reference" />
     <attr name="buttonTextColor" format="reference" />
     <attr name="primaryButtonTheme" format="reference" />
+    <attr name="colorPrimaryOpposite" format="reference"/>
 
 </resources>

@@ -28,6 +28,8 @@ import sk.tuke.archivator.Objects.Global
 import sk.tuke.archivator.MainActivity
 import sk.tuke.archivator.R
 import sk.tuke.archivator.RoomComponents.AppDatabase
+import sk.tuke.archivator.RoomComponents.EventListAdapter
+import sk.tuke.archivator.RoomComponents.FileListAdapter
 import sk.tuke.archivator.RoomComponents.PictureListAdapter
 import sk.tuke.archivator.ViewModels.ItemViewModel
 
@@ -62,12 +64,30 @@ class NewEntry : Fragment()
             pickFile()
         }
 
-        val adapter = PictureListAdapter(activity!!)
-        view.rv_images.adapter = adapter
+        val imageAdapter = PictureListAdapter(activity!!)
+        view.rv_images.adapter = imageAdapter
         view.rv_images.layoutManager = LinearLayoutManager(activity!!)
         NewItem.tmpImages.observe(this, androidx.lifecycle.Observer {
             it?.let {
-                adapter.setItem(it)
+                imageAdapter.setItem(it)
+            }
+        })
+
+        val fileAdapter = FileListAdapter(activity!!)
+        view.rv_files.adapter = fileAdapter
+        view.rv_files.layoutManager = LinearLayoutManager(activity!!)
+        NewItem.tmpFiles.observe(this, androidx.lifecycle.Observer {
+            it?.let {
+                fileAdapter.setItem(it)
+            }
+        })
+
+        val eventAdapter = EventListAdapter(activity!!)
+        view.rv_events.adapter = eventAdapter
+        view.rv_events.layoutManager = LinearLayoutManager(activity!!)
+        NewItem.tmpEvents.observe(this, androidx.lifecycle.Observer {
+            it?.let {
+                eventAdapter.setItem(it)
             }
         })
 
@@ -159,7 +179,7 @@ class NewEntry : Fragment()
                     val imageList: MutableList<Image> = mutableListOf()
                     for (i in 0 until data.clipData!!.itemCount)
                     {
-                        imageList.add(Image(uri = data.clipData!!.getItemAt(i).uri, description = data.clipData!!.getItemAt(i).uri.pathSegments.last()))
+                        imageList.add(Image(uri = data.clipData!!.getItemAt(i).uri, description = Global.getFileName(data.clipData!!.getItemAt(i).uri, activity!!)))
                     }
                     NewItem.tmpImages.value?.addAll(imageList)
                     NewItem.tmpImages.postValue(NewItem.tmpImages.value) //update
@@ -167,7 +187,7 @@ class NewEntry : Fragment()
                 //Single item_content
                 data.data != null ->
                 {
-                    NewItem.tmpImages.value?.add(Image(uri = data.data!!, description = data.data!!.pathSegments.last()))
+                    NewItem.tmpImages.value?.add(Image(uri = data.data!!, description = Global.getFileName(data.data!!, activity!!)))
                     NewItem.tmpImages.postValue(NewItem.tmpImages.value) //update
                 }
                 else ->
@@ -190,7 +210,7 @@ class NewEntry : Fragment()
                     val fileList: MutableList<FileEntity> = mutableListOf()
                     for (i in 0 until data.clipData!!.itemCount)
                     {
-                        fileList.add(FileEntity(uri = data.clipData!!.getItemAt(i).uri))
+                        fileList.add(FileEntity(uri = data.clipData!!.getItemAt(i).uri, description = Global.getFileName(data.clipData!!.getItemAt(i).uri, activity!!)))
                     }
                     NewItem.tmpFiles.value!!.addAll(fileList)
                     NewItem.tmpFiles.postValue(NewItem.tmpFiles.value) //update
@@ -198,7 +218,7 @@ class NewEntry : Fragment()
                 //Single file
                 data.data != null ->
                 {
-                    NewItem.tmpFiles.value!!.add(FileEntity(uri = data.data!!))
+                    NewItem.tmpFiles.value!!.add(FileEntity(uri = data.data!!, description = Global.getFileName(data.data!!, activity!!)))
                     NewItem.tmpFiles.postValue(NewItem.tmpFiles.value) //update
                 }
                 else ->

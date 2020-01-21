@@ -2,7 +2,6 @@ package sk.tuke.archivator.RoomComponents
 
 import android.app.AlertDialog
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,17 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import sk.tuke.archivator.Entities.Image
-import sk.tuke.archivator.Entities.Item
+import sk.tuke.archivator.Entities.Event
+import sk.tuke.archivator.Entities.FileEntity
 import sk.tuke.archivator.Objects.NewItem
 import sk.tuke.archivator.R
-import java.lang.Exception
 
-class PictureListAdapter(context: Context): RecyclerView.Adapter<PictureListAdapter.ImageViewHolder>() {
+class EventListAdapter(context: Context): RecyclerView.Adapter<EventListAdapter.ImageViewHolder>() {
 
     private val context = context
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var images = emptyList<Image>() // Cached copy of items
+    private var events = emptyList<Event>() // Cached copy of items
 
     inner class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.iv_image)
@@ -38,21 +36,21 @@ class PictureListAdapter(context: Context): RecyclerView.Adapter<PictureListAdap
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val current = images[position]
-        holder.image.setImageURI(current.uri)
-        holder.desc.text = current.description
+        val current = events[position]
+        holder.image.setImageResource(R.drawable.ic_attach_file_black_24dp)
+        holder.desc.text = current.name
 
         holder.desc.setOnClickListener {
             val etName = EditText(context).apply {
-                this.setText(current.description)
+                this.setText(current.name)
             }
             AlertDialog.Builder(context).apply {
-                this.setTitle("Description")
-                this.setMessage("Set new description")
+                this.setTitle("Rename")
+                this.setMessage("Set new name")
                 this.setView(etName)
-                this.setPositiveButton("Edit") { _, _ ->
+                this.setPositiveButton("Rename") { _, _ ->
                     holder.desc.text = etName.text.toString() //update view
-                    current.description = etName.text.toString() //update image
+                    current.name = etName.text.toString() //update image
                 }
                 this.setNegativeButton("Cancel", null)
             }.create().show()
@@ -60,20 +58,20 @@ class PictureListAdapter(context: Context): RecyclerView.Adapter<PictureListAdap
 
         holder.btDelete.setOnClickListener {
             CoroutineScope(Dispatchers.Default).launch {
-                AppDatabase.getDatabase(context).imageDao().delete(current.id)
+                AppDatabase.getDatabase(context).eventDao().delete(current.id)
 
-                NewItem.tmpImages.postValue(
-                    NewItem.tmpImages.value)
+                NewItem.tmpEvents.postValue(
+                    NewItem.tmpEvents.value)
             }
             (it.parent.parent as ViewGroup).removeView(it.parent as View) //self terminate
         }
     }
 
-    internal fun setItem(images: List<Image>) {
-        this.images = images
+    internal fun setItem(events: List<Event>) {
+        this.events = events
 
         notifyDataSetChanged()
     }
 
-    override fun getItemCount() = images.size
+    override fun getItemCount() = events.size
 }

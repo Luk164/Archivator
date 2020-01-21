@@ -41,4 +41,7 @@ abstract class EventDao {
 
     @Delete
     abstract fun delete(event: Event)
+
+    @Query("DELETE FROM events WHERE id = (:eventId)")
+    abstract fun delete(eventId: Long)
 }

@@ -57,7 +57,7 @@
                 android:showDividers="middle">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_dates"
+                    android:id="@+id/rv_events"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
