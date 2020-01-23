@@ -17,9 +17,8 @@ import sk.tuke.archivator.Entities.FileEntity
 import sk.tuke.archivator.Objects.NewItem
 import sk.tuke.archivator.R
 
-class FileListAdapter(context: Context): RecyclerView.Adapter<FileListAdapter.ImageViewHolder>() {
+class FileListAdapter(private val context: Context): RecyclerView.Adapter<FileListAdapter.ImageViewHolder>() {
 
-    private val context = context
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var files = emptyList<FileEntity>() // Cached copy of items
 

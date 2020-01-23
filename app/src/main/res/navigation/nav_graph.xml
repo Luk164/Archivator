@@ -14,6 +14,9 @@
             android:id="@+id/action_login_to_mainScreen"
             app:destination="@id/mainScreen" />
     </fragment>
+    <!--Global action-->
+    <action android:id="@+id/open_login_fragment"
+        app:destination="@id/login"/>
     <fragment
         android:id="@+id/mainScreen"
         android:name="sk.tuke.archivator.Fragments.MainScreen"
@@ -33,8 +36,13 @@
         tools:layout="@layout/fragment_new_entry" />
     <fragment
         android:id="@+id/settings"
-        android:name="sk.tuke.archivator.Settings"
+        android:name="sk.tuke.archivator.Fragments.Settings"
         android:label="Settings" />
+
+    <!--Global action-->
+    <action android:id="@+id/open_settings_fragment"
+        app:destination="@id/settings"/>
+
     <fragment
         android:id="@+id/showDetails"
         android:name="sk.tuke.archivator.Fragments.ShowDetails"

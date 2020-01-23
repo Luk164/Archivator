@@ -98,7 +98,7 @@
                 android:id="@+id/button_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_gallery"
+                app:srcCompat="@android:drawable/ic_menu_gallery"
                 fab:fab_label="Image"
                 fab:fab_size="mini" />
 
@@ -106,7 +106,7 @@
                 android:id="@+id/button_file"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_attach_file_white_24dp"
+                app:srcCompat="@drawable/ic_attach_file_white_24dp"
                 fab:fab_label="File"
                 fab:fab_size="mini" />
 
@@ -114,7 +114,7 @@
                 android:id="@+id/button_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_date_range_black_24dp"
+                app:srcCompat="@drawable/ic_date_range_black_24dp"
                 fab:fab_label="Event"
                 fab:fab_size="mini" />
 

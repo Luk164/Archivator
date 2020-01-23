@@ -13,16 +13,16 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "sk.tuke.archivator"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-//    defaultConfig {
-//        vectorDrawables.useSupportLibrary = true
-//    }
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
 
     compileOptions {
         sourceCompatibility "1.8"
@@ -52,27 +52,27 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.0'
 
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation "androidx.work:work-runtime-ktx:2.2.0"
+    implementation "androidx.work:work-runtime-ktx:2.3.0"
 
     implementation 'com.android.volley:volley:1.1.1'
 //    implementation 'com.github.clans:fab:1.6.4' // Floating Action Button library
-    implementation 'com.github.Luk164:FloatingActionButton:1.7.0' // My FAB fork
+    implementation 'com.github.Luk164:FloatingActionButton:1.7.1-Beta' // My FAB fork
 
     // ViewModel and LiveData
-    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
-    implementation "androidx.lifecycle:lifecycle-livedata:2.1.0"
-    implementation "androidx.lifecycle:lifecycle-runtime:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0"
 
-    implementation "androidx.lifecycle:lifecycle-common-java8:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
 
     // optional - ReactiveStreams support for LiveData
-    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0"
 
     implementation "androidx.room:room-runtime:2.2.3"
     kapt "androidx.room:room-compiler:2.2.3" // For Kotlin use kapt
@@ -82,7 +82,7 @@ dependencies {
 
     // Test helpers
     testImplementation "androidx.room:room-testing:2.2.3"
-    androidTestImplementation "androidx.work:work-testing:2.2.0"
+    androidTestImplementation "androidx.work:work-testing:2.3.0"
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     //Auto added

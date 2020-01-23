@@ -4,5 +4,5 @@
 <!--        android:startColor="?colorPrimary"-->
 <!--        android:endColor="?colorPrimaryDark"-->
 <!--        android:type="linear" />-->
-    <solid android:color="@android:color/transparent" />
+    <solid android:color="?colorPrimary" />
 </shape>

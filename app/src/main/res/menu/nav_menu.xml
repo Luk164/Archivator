@@ -16,7 +16,7 @@
     </group>
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/settings"
+            android:id="@+id/open_settings_fragment"
             android:checkable="false"
             android:icon="@android:drawable/ic_menu_preferences"
             android:title="@string/settings" />
