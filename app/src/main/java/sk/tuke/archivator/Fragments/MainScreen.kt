@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -63,7 +63,7 @@ class MainScreen : Fragment()
         rw_items.layoutManager = LinearLayoutManager(activity!!)
 
         val itemViewModel = activity?.run {
-            ViewModelProviders.of(this)[ItemViewModel::class.java]
+            ViewModelProvider(this).get(ItemViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         itemViewModel.itemDao.getAllLive().observe(this, Observer {

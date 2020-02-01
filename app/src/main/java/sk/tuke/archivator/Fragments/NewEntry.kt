@@ -14,7 +14,7 @@ import android.view.*
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.CoroutineScope
@@ -53,7 +53,7 @@ class NewEntry : Fragment()
         setHasOptionsMenu(true)
 
         itemViewModel = activity?.run {
-            ViewModelProviders.of(this)[ItemViewModel::class.java]
+            ViewModelProvider(this).get(ItemViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         view.button_image.setOnClickListener {

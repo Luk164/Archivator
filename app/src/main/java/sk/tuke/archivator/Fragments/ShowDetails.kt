@@ -8,7 +8,7 @@ import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +46,7 @@ class ShowDetails : Fragment() {
         tv_id.text = "${getString(R.string.item_id_is)}$value"
 
         val itemViewModel = activity?.run {
-            ViewModelProviders.of(this)[ItemViewModel::class.java]
+            ViewModelProvider(this).get(ItemViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         val adapter = PictureListAdapter(activity!!)

@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
@@ -31,7 +31,7 @@ class Login : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         appViewModel = activity?.run {
-            ViewModelProviders.of(this)[AppViewModel::class.java]
+            ViewModelProvider(this).get(AppViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         view.button_login.setOnClickListener{

@@ -12,10 +12,9 @@ import android.hardware.camera2.CameraManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -63,8 +62,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         Global.dateFormatter = SimpleDateFormat("dd.MM.yyyy G", Locale.getDefault())
         setContentView(R.layout.activity_main)
         Global.VNM = VolleyNetworkManager(this)
-        itemViewModel = ViewModelProviders.of(this)[ItemViewModel::class.java]
-        appViewModel = ViewModelProviders.of(this)[AppViewModel::class.java]
+        itemViewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
+        appViewModel = ViewModelProvider(this).get(AppViewModel::class.java)
 
         setSupportActionBar(toolbar)
 
