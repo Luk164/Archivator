@@ -71,6 +71,7 @@ class MainScreen : Fragment()
                 adapter.setItems(it)
             }
         })
+        val itemView = this.layoutInflater.inflate(R.layout.item, view?.rw_items, false)
         initSwipe()
     }
 
