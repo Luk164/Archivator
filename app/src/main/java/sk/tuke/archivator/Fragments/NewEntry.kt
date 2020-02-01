@@ -39,7 +39,6 @@ import sk.tuke.archivator.ViewModels.ItemViewModel
  */
 class NewEntry : Fragment()
 {
-
     private lateinit var itemViewModel: ItemViewModel
 
     override fun onCreateView(
@@ -67,7 +66,7 @@ class NewEntry : Fragment()
         val imageAdapter = PictureListAdapter(activity!!)
         view.rv_images.adapter = imageAdapter
         view.rv_images.layoutManager = LinearLayoutManager(activity!!)
-        NewItem.tmpImages.observe(this, androidx.lifecycle.Observer {
+        NewItem.tmpImages.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             it?.let {
                 imageAdapter.setItem(it)
             }
@@ -76,7 +75,7 @@ class NewEntry : Fragment()
         val fileAdapter = FileListAdapter(activity!!)
         view.rv_files.adapter = fileAdapter
         view.rv_files.layoutManager = LinearLayoutManager(activity!!)
-        NewItem.tmpFiles.observe(this, androidx.lifecycle.Observer {
+        NewItem.tmpFiles.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             it?.let {
                 fileAdapter.setItem(it)
             }
@@ -85,7 +84,7 @@ class NewEntry : Fragment()
         val eventAdapter = EventListAdapter(activity!!)
         view.rv_events.adapter = eventAdapter
         view.rv_events.layoutManager = LinearLayoutManager(activity!!)
-        NewItem.tmpEvents.observe(this, androidx.lifecycle.Observer {
+        NewItem.tmpEvents.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             it?.let {
                 eventAdapter.setItem(it)
             }
