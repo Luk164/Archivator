@@ -39,7 +39,6 @@ class ShowDetails : Fragment() {
         return view
     }
 
-    //TODO FIXME
     @SuppressLint("SetTextI18n")
     override fun onStart() {
         super.onStart()

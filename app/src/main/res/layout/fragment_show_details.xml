@@ -14,7 +14,7 @@
             android:id="@+id/tv_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:text="@string/n_a"
             android:textSize="36sp"
             android:textStyle="bold"
@@ -26,13 +26,13 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/n_a"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_id" />
 
@@ -40,23 +40,55 @@
             android:id="@+id/tv_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/n_a"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_images"
+        <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_desc">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/standard_divider"
+                android:dividerPadding="5dp"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_events"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_files"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp" />
+
+            </LinearLayout>
+        </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

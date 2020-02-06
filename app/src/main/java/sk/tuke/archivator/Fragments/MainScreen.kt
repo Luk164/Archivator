@@ -160,7 +160,7 @@ class MainScreen : Fragment()
                             resources.getDrawable(R.drawable.archive_black_24dp, activity?.theme)
                         } else
                         {
-                            AppCompatResources.getDrawable(activity!!, R.drawable.archive_dynamic_24dp)
+                            AppCompatResources.getDrawable(activity!!, R.drawable.archive_black_24dp)
                         }.apply {
                             this!!.setBounds(
                                 itemView.left,
@@ -185,10 +185,10 @@ class MainScreen : Fragment()
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                         {
-                            resources.getDrawable(R.drawable.delete_sweep_dynamic_24dp, activity?.theme)
+                            resources.getDrawable(R.drawable.delete_sweep_black_24dp, activity?.theme)
                         } else
                         {
-                            AppCompatResources.getDrawable(activity!!, R.drawable.delete_sweep_dynamic_24dp)
+                            AppCompatResources.getDrawable(activity!!, R.drawable.delete_sweep_black_24dp)
                         }.apply {
                             this!!.setBounds(
                                 (itemView.right - 2 * width).toInt(),

@@ -13,7 +13,9 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -112,6 +114,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         super.onStart()
         listener = SharedPreferences.OnSharedPreferenceChangeListener { _: SharedPreferences, key: String ->
             if (key == "setting_select_theme") {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                {
+                    AlertDialog.Builder(this).apply {
+                        this.setTitle("Warning")
+                        this.setMessage("Themes will not work fully since your device OS is too outdated.")
+                    }
+                }
                 recreate()
             }
         }
