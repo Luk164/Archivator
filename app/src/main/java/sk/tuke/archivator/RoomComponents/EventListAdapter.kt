@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import sk.tuke.archivator.Entities.Event
-import sk.tuke.archivator.Entities.FileEntity
 import sk.tuke.archivator.Objects.NewItem
 import sk.tuke.archivator.R
 
@@ -37,7 +36,7 @@ class EventListAdapter(context: Context): RecyclerView.Adapter<EventListAdapter.
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val current = events[position]
-        holder.image.setImageResource(R.drawable.ic_attach_file_black_24dp)
+        holder.image.setImageResource(R.drawable.ic_attach_file_white_24dp)
         holder.desc.text = current.name
 
         holder.desc.setOnClickListener {

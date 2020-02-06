@@ -7,15 +7,17 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_show_details.*
 import sk.tuke.archivator.MainActivity
+import sk.tuke.archivator.Objects.NewItem
 import sk.tuke.archivator.R
 import sk.tuke.archivator.RoomComponents.AppDatabase
+import sk.tuke.archivator.RoomComponents.EventListAdapter
+import sk.tuke.archivator.RoomComponents.FileListAdapter
 import sk.tuke.archivator.RoomComponents.PictureListAdapter
 import sk.tuke.archivator.ViewModels.ItemViewModel
 
@@ -42,22 +44,44 @@ class ShowDetails : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val value = args.ID
-        tv_id.text = "${getString(R.string.item_id_is)}$value"
+        val passedID = args.ID
+        tv_id.text = "${getString(R.string.item_id_is)}$passedID"
 
         val itemViewModel = activity?.run {
             ViewModelProvider(this).get(ItemViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        val adapter = PictureListAdapter(activity!!)
-        rv_images.adapter = adapter
-        rv_images.layoutManager = LinearLayoutManager(activity!!)
+        val itemToShow = itemViewModel.itemDao.getItemWithStuffLive(passedID)
 
-        itemViewModel.itemDao.getItemWithStuffLive(args.ID).observe(this, Observer {
-            it.let {
-                tv_name.text = it.item.name
-                tv_desc.text = it.item.desc
-                adapter.setItem(it.images)
+        itemToShow.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            tv_name.text = it.item.name
+            tv_desc.text = it.item.desc
+        })
+
+        val imageAdapter = PictureListAdapter(activity!!)
+        rv_images.adapter = imageAdapter
+        rv_images.layoutManager = LinearLayoutManager(activity!!)
+        itemToShow.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it?.let {
+                imageAdapter.setItem(it.images)
+            }
+        })
+
+        val fileAdapter = FileListAdapter(activity!!)
+        rv_files.adapter = fileAdapter
+        rv_files.layoutManager = LinearLayoutManager(activity!!)
+        itemToShow.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it?.let {
+                fileAdapter.setItem(it.files)
+            }
+        })
+
+        val eventAdapter = EventListAdapter(activity!!)
+        rv_events.adapter = eventAdapter
+        rv_events.layoutManager = LinearLayoutManager(activity!!)
+        itemToShow.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            it?.let {
+                eventAdapter.setItem(it.events)
             }
         })
     }

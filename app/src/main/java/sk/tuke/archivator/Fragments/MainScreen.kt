@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -44,7 +45,8 @@ class MainScreen : Fragment()
         setHasOptionsMenu(true)
 
         view.searchView.setOnSearchClickListener {
-            Toast.makeText(activity!!, "This function is not implemented yet", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity!!, "This function is not implemented yet", Toast.LENGTH_SHORT)
+                .show()
         }
 
         view.button_newEntry.setOnClickListener {
@@ -136,10 +138,8 @@ class MainScreen : Fragment()
                 isCurrentlyActive: Boolean
             )
             {
-
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE)
                 {
-
                     val itemView = viewHolder.itemView
                     val height = itemView.bottom.toFloat() - itemView.top.toFloat()
                     val width = height / 3
@@ -160,10 +160,9 @@ class MainScreen : Fragment()
                             resources.getDrawable(R.drawable.archive_black_24dp, activity?.theme)
                         } else
                         {
-                            @Suppress("DEPRECATION")
-                            resources.getDrawable(R.drawable.archive_black_24dp)
+                            AppCompatResources.getDrawable(activity!!, R.drawable.archive_dynamic_24dp)
                         }.apply {
-                            this.setBounds(
+                            this!!.setBounds(
                                 itemView.left,
                                 itemView.top,
                                 (itemView.left + 2 * width).toInt(),
@@ -186,16 +185,12 @@ class MainScreen : Fragment()
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                         {
-                            resources.getDrawable(
-                                R.drawable.delete_sweep_black_24dp,
-                                activity?.theme
-                            )
+                            resources.getDrawable(R.drawable.delete_sweep_dynamic_24dp, activity?.theme)
                         } else
                         {
-                            @Suppress("DEPRECATION")
-                            resources.getDrawable(R.drawable.delete_sweep_black_24dp)
+                            AppCompatResources.getDrawable(activity!!, R.drawable.delete_sweep_dynamic_24dp)
                         }.apply {
-                            this.setBounds(
+                            this!!.setBounds(
                                 (itemView.right - 2 * width).toInt(),
                                 itemView.top,
                                 itemView.right,

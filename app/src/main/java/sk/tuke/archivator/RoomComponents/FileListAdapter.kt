@@ -35,7 +35,7 @@ class FileListAdapter(private val context: Context): RecyclerView.Adapter<FileLi
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val current = files[position]
-        holder.image.setImageResource(R.drawable.ic_attach_file_black_24dp)
+        holder.image.setImageResource(R.drawable.ic_attach_file_white_24dp)
         holder.desc.text = current.description
 
         holder.desc.setOnClickListener {

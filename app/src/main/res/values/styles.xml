@@ -1,44 +1,50 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="lightTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/sky_blue</item>
-        <item name="colorPrimaryDark">@color/black</item>
-        <item name="colorAccent">@color/green</item>
-        <item name="colorPrimaryOpposite">@color/black</item>
-        <item name="android:windowActivityTransitions" tools:ignore="NewApi">true</item>
-        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
-        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
-    </style>
-
-    <style name="darkThemeAmoled" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryDark">@color/material_dark</item>
-        <item name="colorPrimaryOpposite">@color/white</item>
-        <item name="android:background">@android:color/transparent </item>
-        <item name="android:windowBackground">@color/black</item>
-        <item name="android:windowActivityTransitions" tools:ignore="NewApi">true</item>
-        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
-        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
-    </style>
-
-    <style name="darkTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/material_dark</item>
-        <item name="colorPrimaryDark">@color/navy</item>
-        <item name="colorAccent">@color/red</item>
-        <item name="colorPrimaryOpposite">@color/white</item>
-        <item name="android:windowActivityTransitions" tools:ignore="NewApi">true</item>
-        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
-        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
-    </style>
-
-    <style name="exp1" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/peru</item>
-        <item name="colorPrimaryDark">@color/saddle_brown</item>
+    <style name="baseLightTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/grey</item>
         <item name="colorAccent">@color/orange_red</item>
         <item name="colorPrimaryOpposite">@color/black</item>
         <item name="android:windowActivityTransitions" tools:ignore="NewApi">true</item>
         <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
         <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+
+    <style name="baseDarkTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/material_dark</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorPrimaryOpposite">@color/white</item>
+        <item name="android:windowActivityTransitions" tools:ignore="NewApi">true</item>
+        <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+
+    <style name="lightTheme" parent="baseLightTheme">
+        <item name="colorPrimary">@color/sky_blue</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/green</item>
+    </style>
+
+    <style name="darkThemeAmoled" parent="baseDarkTheme">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/material_dark</item>
+        <item name="colorPrimaryOpposite">@color/white</item>
+        <item name="android:background">@android:color/transparent </item>
+        <item name="android:windowBackground">@color/black</item>
+    </style>
+
+    <style name="darkTheme" parent="baseDarkTheme">
+        <item name="colorPrimary">@color/material_dark</item>
+        <item name="colorPrimaryDark">@color/navy</item>
+        <item name="colorAccent">@color/red</item>
+        <item name="colorPrimaryOpposite">@color/white</item>
+    </style>
+
+    <style name="exp1" parent="baseLightTheme">
+        <item name="colorPrimary">@color/peru</item>
+        <item name="colorPrimaryDark">@color/saddle_brown</item>
+        <item name="colorAccent">@color/orange_red</item>
+        <item name="colorPrimaryOpposite">@color/black</item>
     </style>
 
     <style name="darkCard">
